@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Обьявления</title>
+</head>
+<body>
+<h2>Магазин «AXBY»</h2>
+    <ul>
+        {% for adv in advertisments %}
+            <li>{{ adv }}</li>
+        {% endfor %}
+    </ul>
+
+<form method="POST" action="{% url 'advertisements' %}">
+    {% csrf_token %}
+    <button type="submit">POST-запрос на {% url 'advertisements' %}</button>
+</form>
+</body>
+</html>
