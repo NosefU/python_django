@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>
+<form method="GET" action="{% url 'advertisements' %}">
+    <label>
+        Категория:
+        <select name="category">
+            {% for cat in categories %}
+                <option>{{ cat }}</option>
+            {% endfor %}
+        </select>
+    </label><br>
+
+    <label>
+        Регион:
+        <select name="region">
+            {% for region in regions %}
+                <option>{{ region }}</option>
+            {% endfor %}
+        </select>
+    </label><br>
+    <label>
+        <input type="text" name="query">
+    </label>
+    <button type="submit">Найти</button>
+</form>
+<br><br><br>
+<a href="{% url 'about' %}">О нас</a><br>
+<a href="{% url 'contacts' %}">Контакты</a>
+</body>
+</html>

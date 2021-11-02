@@ -57,6 +57,22 @@ class About(TemplateView):
         })
         return context
 
+
+class Main(View):
+    def get(self, request):
+        context = {
+            'categories': [
+                'автомобили', 'недвижимость', 'электроника',
+                'антиквариат', 'косметика', 'продукты питания', 'мебель',
+            ],
+            'regions': [
+                'Московская область', 'Новгородская область', 'Воронежская область',
+                'Тульская область', 'Республика Саха', 'Республика Карелия', 'Тверская область',
+            ]
+        }
+        return render(request, 'advertisements/main.html', context)
+
+
 def advertisement_list(request, *args, **kwargs):
     advertisements = [
         'Мастер на час',
