@@ -6,7 +6,7 @@ class Advertisement(models.Model):
     description = models.TextField(verbose_name='Описание')
     price = models.FloatField(default=0, verbose_name='Цена')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-    modified = models.DateTimeField(auto_now_add=True, auto_now=True, verbose_name='Дата изменения')
+    modified = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
     expiration_date = models.DateTimeField(default=None, null=True, verbose_name='Дата окончания публикации')
     views_count = models.IntegerField(default=0, verbose_name='Количество просмотров')
     author = models.ForeignKey('User', default=None, null=True, verbose_name='Автор',
