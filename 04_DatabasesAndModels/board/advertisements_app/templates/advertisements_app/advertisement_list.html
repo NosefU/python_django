@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Обьявления</title>
+</head>
+<body>
+<h2>Объявления</h2>
+<ul>
+    {% for adv in advertisements %}
+        <li><a href="advertisements/{{ adv.id }}">{{ adv.title }} | {{ adv.price }}₽ | {{ adv.category.name }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

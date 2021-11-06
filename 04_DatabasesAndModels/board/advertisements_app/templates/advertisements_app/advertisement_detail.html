@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ advertisement.title }}</title>
+</head>
+<body>
+<h2>{{ advertisement.title }}</h2>
+<p>Просмотров {{ advertisement.views_count }}</p>
+<h3>{{ advertisement.price|floatformat:"-2" }}₽&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;${{ usd_price|floatformat:"-2" }}</h3>
+<p>{{ advertisement.description }}</p>
+<p><b>Категория:</b> {{ advertisement.category.name }}</p>
+<p><b>Статус:</b> {{ advertisement.status.name }}</p>
+<br><br>
+<h4>Контактная информация</h4>
+<p>{{ advertisement.author.name }}<br>
+    <a href="mailto:{{ advertisement.author.email }}">{{ advertisement.author.email }}</a><br>
+    <a href="tel:{{ advertisement.author.phone }}">{{ advertisement.author.phone }}</a></p>
+</body>
+</html>
