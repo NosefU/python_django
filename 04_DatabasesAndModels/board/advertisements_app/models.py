@@ -16,6 +16,9 @@ class Advertisement(models.Model):
     status = models.ForeignKey('AdvertisementStatus', default=None, null=True, verbose_name='Статус',
                                on_delete=models.CASCADE, related_name='advertisements')
 
+    def __str__(self):
+        return f'{self.title} | {self.author.name}'
+
 
 class User(models.Model):
     name = models.CharField(max_length=100, db_index=True, verbose_name='Имя')
