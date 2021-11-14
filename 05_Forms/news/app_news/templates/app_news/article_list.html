@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'app_news/css/bootstrap.min.css' %}">
 
-    <title>Привет мир!</title>
+    <title>MetaNews</title>
     <style>
         .logo-shadow {
             -webkit-filter: drop-shadow(2px 2px 0px rgb(34 60 80));
@@ -41,7 +41,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             <a class="nav-link" aria-current="page" href="{% url 'article_list' %}">На главную</a>
-                            <a class="nav-link" href="#">Предложить новость</a>
+                            <a class="nav-link" href="{% url 'add_article' %}">Предложить новость</a>
                         </div>
                     </div>
                 </div>

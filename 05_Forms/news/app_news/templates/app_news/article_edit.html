@@ -1,0 +1,130 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'app_news/css/bootstrap.min.css' %}">
+
+    <title>MetaNews</title>
+    <style>
+        .logo-shadow {
+            -webkit-filter: drop-shadow(2px 2px 0px rgb(34 60 80));
+            filter: drop-shadow(2px 2px 0px rgb(34 60 80));
+        }
+
+        .content-container {
+            border-radius: 5px;
+            background-color: white;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            z-index: 1;
+            position: relative;
+        }
+
+        .alert-field {
+            margin-top: -1.5rem;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-dark">
+
+<div class="container-md bg-dark ">
+    {#    navbar    #}
+    <div class="row bg-dark">
+        <div class="col">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand mb-0 h1" href="{% url 'article_list' %}">
+                        <img src="{% static 'app_news/img/logo.svg' %}" alt="" width="30" height="24"
+                             class="d-inline-block align-text-top logo-shadow">
+                        MetaNews
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link" aria-current="page" href="{% url 'article_list' %}">На главную</a>
+                            <a class="nav-link" href="{% url 'add_article' %}">Предложить новость</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center content-container">
+        <div class="col-8 gy-4">
+            <div class="row text-center">
+                <h1>Предложите свою новость</h1>
+            </div>
+        </div>
+        <div class="col-8 gy-2">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {# all form errors #}
+                {% if article_form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in article_form.non_field_errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# title #}
+                <p class="form-floating">
+                    {{ article_form.title }}
+                    <label for="{{ article_form.title.id_for_label }}">Заголовок</label>
+                </p>
+                {% if article_form.title.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in article_form.title.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# subtitle #}
+                <p class="form-floating">
+                    {{ article_form.subtitle }}
+                    <label for="{{ article_form.subtitle.id_for_label }}">Подзаголовок</label>
+                </p>
+                {% if article_form.subtitle.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in article_form.subtitle.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# image #}
+                <p>
+                    <label for="{{ article_form.image.id_for_label }}" class="form-label">Картинка:</label>
+                    {{ article_form.image }}
+                </p>
+                {% if article_form.image.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in article_form.image.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# body #}
+                <p class="form-floating">
+                    {{ article_form.body }}
+                    <label for="{{ article_form.body.id_for_label }}">Текст новости</label>
+                </p>
+                {% if article_form.body.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in article_form.body.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn btn-primary col-12">Отправить</button>
+            </form>
+
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>
