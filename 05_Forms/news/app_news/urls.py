@@ -5,7 +5,7 @@ from news import settings
 
 urlpatterns = [
     path('', ArticleList.as_view(), name='article_list'),
-    path('article/<int:pk>', ArticleDetail.as_view(), name='article_detail'),
+    path('article/<int:article_id>', ArticleDetail.as_view(), name='article_detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

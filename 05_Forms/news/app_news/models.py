@@ -17,10 +17,13 @@ class Article(models.Model):
 
 
 class Comment(models.Model):
-    username = models.CharField(max_length=100, verbose_name='Заголовок')
-    body = models.CharField(max_length=600, default='Подзаголовок')
+    username = models.CharField(max_length=100, verbose_name='Имя пользователя')
+    body = models.TextField(max_length=600, verbose_name='Комментарий')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comment', verbose_name='Новость')
+    article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comments', verbose_name='Новость')
 
     class Meta:
-        ordering = ['created', ]
+        ordering = ['-created', ]
+
+    def __str__(self):
+        return f'{self.username} | {self.body}'
