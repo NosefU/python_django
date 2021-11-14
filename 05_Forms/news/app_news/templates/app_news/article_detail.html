@@ -1,0 +1,113 @@
+{% load staticfiles %}
+{% load tz %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'app_news/css/bootstrap.min.css' %}">
+
+    <title>Привет мир!</title>
+    <style>
+        .logo-shadow {
+            -webkit-filter: drop-shadow(2px 2px 0px rgb(34 60 80));
+            filter: drop-shadow(2px 2px 0px rgb(34 60 80));
+        }
+
+        .content-container {
+            border-radius: 5px;
+            background-color: white;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .title-image {
+            width: 100%;
+            height: 29em;
+            object-fit: cover;
+            padding-right: 0;
+            padding-left: 0;
+            border-radius: inherit;
+        }
+        .title-image-container {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body class="bg-dark" >
+
+<div class="container-md bg-dark ">
+    {#    navbar    #}
+    <div class="row bg-dark">
+        <div class="col">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand mb-0 h1" href="{% url 'article_list' %}">
+                        <img src="{% static 'app_news/img/logo.svg' %}" alt="" width="30" height="24"
+                             class="d-inline-block align-text-top logo-shadow">
+                        MetaNews
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link" aria-current="page" href="{% url 'article_list' %}">На главную</a>
+                            <a class="nav-link" href="#">Предложить новость</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    {#    content    #}
+    <div class="row justify-content-center content-container">
+        {#    title and date    #}
+        <div class="col-8 gy-4">
+            <div class="row text-center">
+                <h1 style="display: contents;">{{ article.title }} </h1>
+                <p class="fs-1" style="display: contents;">{{ article.subtitle }}</p>
+            </div>
+            <div class="row text-center">
+                <p><small class="text-muted">{{ article.created|timezone:"Europe/Moscow" }}</small></p>
+            </div>
+        </div>
+
+        {#    picture    #}
+        <div class="col-12 title-image-container">
+            <img src="{{ article.image.url }}" class="title-image" alt="...">
+        </div>
+
+        {#    article body    #}
+        <div class="col-6 gy-4">
+            <div class="row fs-5">
+                 {{ article.body|linebreaks }}
+
+            </div>
+        </div>
+
+
+
+{#        {% for article in article_list %}#}
+            {# карточка начало #}
+{#            <div class="col g-4">#}
+{#                <div class="card">#}
+{#                    <a href="#" class="stretched-link">#}
+{#                        <img src="{{ article.image.url }}" class="card-img-top" alt="...">#}
+{#                    </a>#}
+{#                    <div class="card-body">#}
+{#                        <h5 class="card-title">{{ article.title }}</h5>#}
+{#                        <p class="card-text">{{ article.subtitle }}</p>#}
+{#                        <p class="card-text"><small class="text-muted">#}
+{#                            {{ article.created|timezone:"Europe/Moscow" }}</small></p>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+            {# карточка конец #}
+{#        {% endfor %}#}
+    </div>
+</div>
+
+</body>
+</html>
