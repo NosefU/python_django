@@ -22,7 +22,7 @@
                     <div class="d-grid justify-content-end">
                         <a class="btn btn-outline-dark btn-sm btn-shadow" href="{% url 'edit_article' article.id %}">Редактировать</a>
                     </div>
-            </div>
+                </div>
             </div>
         </div>
 
@@ -41,20 +41,18 @@
 
         {#    comments section   #}
         <div class="row justify-content-center">
-            <div class="col-8 gy-5">
-                <h1>Комментировать</h1>
+            <div class="col-6 gy-5">
+
 
                 {#    comment form   #}
-                <div class="row justify-content-center">
-                    <div class="col-8 gy-2">
-                        {% comment_form comment_form %}
-                    </div>
-                </div>
+                <h1>Комментировать</h1>
+                {% comment_form comment_form %}
+
 
                 {#    comments list   #}
                 {% for comment in comments %}
                     <div class="row justify-content-center">
-                        <div class="card col-8 gy-4" id="comment_{{ comment.id }}">
+                        <div class="card col gy-4" id="comment_{{ comment.id }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ comment.username }}</h5>
                                 <p class="card-text">{{ comment.body }}</p>
