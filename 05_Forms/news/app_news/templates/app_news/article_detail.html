@@ -37,6 +37,15 @@
             padding-right: 0;
             padding-left: 0;
         }
+        .form-p {
+            z-index: 1;
+            position: relative;
+        }
+
+        .alert-field {
+            margin-top: -1.5rem;
+            z-index: 0;
+        }
     </style>
 </head>
 <body class="bg-dark">
@@ -100,17 +109,34 @@
                     <div class="col-8 gy-2">
                         <form method="post">
                             {% csrf_token %}
-                            <p class="form-floating">
-                                <input type="text" class="form-control" name="username" maxlength="100" required=""
-                                       id="id_username" placeholder="Имя пользователя">
-                                <label for="id_username">Имя пользователя</label>
-                            </p>
-                            <p class="form-floating">
+                            {# all form errors #}
+                            {% if comment_form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {% for error in comment_form.non_field_errors %} {{ error }} <br> {% endfor %}
+                                </div>
+                            {% endif %}
 
-                                <textarea name="body" cols="40" rows="10" maxlength="600" required="" id="id_body"
-                                          class="form-control" placeholder="Комментарий"></textarea>
-                                <label for="id_body">Комментарий</label>
+                            {# username #}
+                            <p class="form-floating form-p">
+                                {{ comment_form.username }}
+                                <label for="{{ comment_form.username.id_for_label }}">Имя пользователя</label>
                             </p>
+                            {% if comment_form.username.errors %}
+                                <div class="alert alert-danger alert-field" role="alert">
+                                    {% for error in comment_form.username.errors %} {{ error }} <br> {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            {# comment body #}
+                            <p class="form-floating form-p">
+                                {{ comment_form.body }}
+                                <label for="{{ comment_form.body.id_for_label }}">Комментарий</label>
+                            </p>
+                            {% if comment_form.body.errors %}
+                                <div class="alert alert-danger alert-field" role="alert">
+                                    {% for error in comment_form.body.errors %} {{ error }} <br> {% endfor %}
+                                </div>
+                            {% endif %}
                             <button type="submit" class="btn btn-primary col-12">Отправить</button>
                         </form>
 

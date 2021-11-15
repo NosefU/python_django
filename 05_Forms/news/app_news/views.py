@@ -27,8 +27,16 @@ class ArticleDetail(View):
 
     def post(self, request, article_id):
         comment_form = CommentForm(request.POST)
+
         if not comment_form.is_valid():
-            return HttpResponseBadRequest(f'Некорректный комментарий: {comment_form.errors}')
+            article = Article.objects.get(id=article_id)
+            comments = article.comments.all()
+            context = {
+                'article': article,
+                'comment_form': comment_form,
+                'comments': comments
+            }
+            return render(request, 'app_news/article_detail.html', context=context)
 
         article = Article.objects.get(id=article_id)
         comment = Comment.objects.create(**comment_form.cleaned_data, article=article)
