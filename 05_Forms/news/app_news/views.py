@@ -46,12 +46,32 @@ class ArticleDetail(View):
 class AddArticle(View):
     def get(self, request):
         article_form = ArticleForm()
-        return render(request, 'app_news/article_edit.html', context={'article_form': article_form})
+        context = {'article_form': article_form, 'title': 'Предложите свою новость'}
+        return render(request, 'app_news/article_edit.html', context=context)
 
     def post(self, request):
         article_form = ArticleForm(request.POST, request.FILES)
         if not article_form.is_valid():
-            return render(request, 'app_news/article_edit.html', context={'article_form': article_form})
+            context = {'article_form': article_form, 'title': 'Предложите свою новость'}
+            return render(request, 'app_news/article_edit.html', context=context)
 
         article = Article.objects.create(**article_form.cleaned_data)
+        return HttpResponseRedirect(f'/article/{article.id}')
+
+
+class EditArticle(View):
+    def get(self, request, article_id):
+        article = Article.objects.get(id=article_id)
+        article_form = ArticleForm(instance=article)
+        context = {'article_form': article_form, 'title': 'Изменить новость'}
+        return render(request, 'app_news/article_edit.html', context=context)
+
+    def post(self, request, article_id):
+        article = Article.objects.get(id=article_id)
+        article_form = ArticleForm(request.POST, request.FILES, instance=article)
+        if not article_form.is_valid():
+            context = {'article_form': article_form, 'title': 'Изменить новость'}
+            return render(request, 'app_news/article_edit.html', context=context)
+
+        article.save()
         return HttpResponseRedirect(f'/article/{article.id}')
