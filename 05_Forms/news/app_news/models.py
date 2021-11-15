@@ -1,10 +1,11 @@
 from django.db import models
+from .utils import GetUUIDName
 
 
 class Article(models.Model):
     title = models.CharField(max_length=200, verbose_name='Заголовок')
-    subtitle = models.CharField(max_length=200, default='', verbose_name='Подзаголовок')
-    image = models.ImageField(upload_to='article_images', verbose_name='Картинка')
+    subtitle = models.CharField(max_length=200, blank=True, default='', verbose_name='Подзаголовок')
+    image = models.ImageField(upload_to=GetUUIDName('article_images'), verbose_name='Картинка')
     body = models.TextField(verbose_name='Текст новости')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     modified = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
