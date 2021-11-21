@@ -1,4 +1,6 @@
 from django.db import models
+from django.template.defaultfilters import truncatechars
+
 from .utils import GetUUIDName
 
 
@@ -9,12 +11,14 @@ class Article(models.Model):
     body = models.TextField(verbose_name='Текст новости')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     modified = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
+    active = models.BooleanField(default=True, verbose_name='Опубликовано')
 
     class Meta:
         ordering = ['-created', ]
 
     def __str__(self):
-        return f'{self.title} | {self.created}'
+        status = 'Опубликовано' if self.active else 'Не опубликовано'
+        return f'{self.title} | {self.created.strftime("%Y-%m-%d %H:%M:%S")} | {status}'
 
 
 class Comment(models.Model):
@@ -23,8 +27,12 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comments', verbose_name='Новость')
 
+    @property
+    def short_body(self):
+        return truncatechars(self.body, 15)
+
     class Meta:
         ordering = ['-created', ]
 
     def __str__(self):
-        return f'{self.username} | {self.body}'
+        return f'{self.username} | {self.short_body}'
