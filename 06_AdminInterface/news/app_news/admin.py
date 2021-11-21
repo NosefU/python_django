@@ -6,6 +6,12 @@ from app_news.models import Article, Comment
 class CommentAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Comment._meta.get_fields()]
     list_filter = ['username']
+    actions = ['delete_as_admin']
+
+    def delete_as_admin(self, request, queryset):
+        queryset.update(body='Удалено администратором')
+
+    delete_as_admin.short_description = 'Зацензурить'
 
 
 class CommentInline(admin.TabularInline):
