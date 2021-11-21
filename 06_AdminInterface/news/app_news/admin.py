@@ -17,6 +17,17 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'subtitle', 'image', 'created', 'modified', 'active']
     list_filter = ['active']
     inlines = [CommentInline, ]
+    actions = ['mark_as_active', 'mark_as_inactive']
+
+    def mark_as_active(self, request, queryset):
+        queryset.update(active=True)
+
+    def mark_as_inactive(self, request, queryset):
+        queryset.update(active=False)
+
+    mark_as_active.short_description = 'Опубликовать'
+    mark_as_inactive.short_description = 'Снять с публикации'
+
 
 
 
