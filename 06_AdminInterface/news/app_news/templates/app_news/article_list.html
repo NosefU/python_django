@@ -1,0 +1,33 @@
+{% extends 'app_news/base_news.html' %}
+
+{% load tz %}
+
+{% block content %}
+    <div class="row">
+        <div class="card text-center announcement">
+            <div class="card-body">
+                <p class="card-text">COVID-19. ЗАРАЗИЛИСЬ: 253 159 980. В РОССИИ: 9 070 674</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 content-container ">
+        {% for article in article_list %}
+            {# карточка начало #}
+            <div class="col g-4">
+                <div class="card  h-100">
+                    <a href="{% url 'article_detail' article.id %}" class="stretched-link">
+                        <img src="{{ article.image.url }}" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.subtitle }}</p>
+                        <p class="card-text"><small class="text-muted">
+                            {{ article.created|timezone:"Europe/Moscow" }}</small></p>
+                    </div>
+                </div>
+            </div>
+            {# карточка конец #}
+        {% endfor %}
+    </div>
+{% endblock content %}

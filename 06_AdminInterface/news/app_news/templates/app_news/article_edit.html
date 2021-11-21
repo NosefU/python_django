@@ -1,0 +1,67 @@
+{% extends 'app_news/base_news.html' %}
+
+{% block content %}
+    <div class="row justify-content-center content-container">
+        <div class="col-8 gy-4">
+            <div class="row text-center">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
+        <div class="col-8 gy-2">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {# all form errors #}
+                {% if article_form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in article_form.non_field_errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# title #}
+                <p class="form-floating form-p">
+                    {{ article_form.title }}
+                    <label for="{{ article_form.title.id_for_label }}">Заголовок</label>
+                </p>
+                {% if article_form.title.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in article_form.title.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# subtitle #}
+                <p class="form-floating form-p">
+                    {{ article_form.subtitle }}
+                    <label for="{{ article_form.subtitle.id_for_label }}">Подзаголовок</label>
+                </p>
+                {% if article_form.subtitle.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in article_form.subtitle.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# image #}
+                <p class="form-p">
+                    <label for="{{ article_form.image.id_for_label }}" class="form-label">Картинка:</label>
+                    {{ article_form.image }}
+                </p>
+                {% if article_form.image.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in article_form.image.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# body #}
+                <p class="form-floating form-p">
+                    {{ article_form.body }}
+                    <label for="{{ article_form.body.id_for_label }}">Текст новости</label>
+                </p>
+                {% if article_form.body.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in article_form.body.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn btn-dark col-12">Отправить</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
