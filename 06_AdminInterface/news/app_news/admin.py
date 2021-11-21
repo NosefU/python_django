@@ -4,9 +4,9 @@ from app_news.models import Article, Comment
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'subtitle', 'image', 'created', 'modified', 'active_text']
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    pass
+    list_display = [field.name for field in Comment._meta.get_fields()]

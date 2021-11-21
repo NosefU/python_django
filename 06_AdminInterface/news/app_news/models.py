@@ -13,12 +13,17 @@ class Article(models.Model):
     modified = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
     active = models.BooleanField(default=True, verbose_name='Опубликовано')
 
+    @property
+    def active_text(self):
+        return 'Опубликовано' if self.active else 'Не опубликовано'
+
+    active_text.fget.short_description = 'Статус публикации'
+
     class Meta:
         ordering = ['-created', ]
 
     def __str__(self):
-        status = 'Опубликовано' if self.active else 'Не опубликовано'
-        return f'{self.title} | {self.created.strftime("%Y-%m-%d %H:%M:%S")} | {status}'
+        return f'{self.title} | {self.created.strftime("%Y-%m-%d %H:%M:%S")} | {self.active_text}'
 
 
 class Comment(models.Model):
