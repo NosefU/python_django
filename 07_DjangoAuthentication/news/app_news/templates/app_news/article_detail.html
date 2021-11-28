@@ -55,9 +55,16 @@
                         <div class="card col gy-4" id="comment_{{ comment.id }}">
                             <div class="card-body">
                                 {% if comment.user == None %}
-                                    <h5 class="card-title">{{ comment.username }}</h5>
+                                    {#    anonymous comment, adding annon badge   #}
+                                    <div class="card-title">
+                                        <span class="h5 card-title align-middle">{{ comment.username }}</span>
+                                        <span class="badge bg-secondary mx-1 align-middle" >Аноним</span>
+                                    </div>
                                 {% else %}
-                                    <h5 class="card-title">{{ comment.user.username }}</h5>
+                                    {#    registered user comment   #}
+                                    <div class="card-title">
+                                        <span class="h5 card-title align-middle">{{ comment.user.username }}</span>
+                                    </div>
                                 {% endif %}
                                 <p class="card-text">{{ comment.body }}</p>
                                 <p class="card-text text-end"><small class="text-muted">
