@@ -8,14 +8,19 @@
     {% endif %}
 
     {# username #}
-    <p class="form-floating form-p">
-        {{ comment_form.username }}
-        <label for="{{ comment_form.username.id_for_label }}">Имя пользователя</label>
-    </p>
-    {% if comment_form.username.errors %}
-        <div class="alert alert-danger alert-field" role="alert">
-            {% for error in comment_form.username.errors %} {{ error }} <br> {% endfor %}
-        </div>
+    {% if request.user.is_authenticated %}
+        <input type="hidden" name="username" value="{{ request.user.username }}">
+        <input type="hidden" name="user" value="{{ request.user.id }}">
+    {% else %}
+        <p class="form-floating form-p">
+            {{ comment_form.username }}
+            <label for="{{ comment_form.username.id_for_label }}">Имя пользователя</label>
+        </p>
+        {% if comment_form.username.errors %}
+            <div class="alert alert-danger alert-field" role="alert">
+                {% for error in comment_form.username.errors %} {{ error }} <br> {% endfor %}
+            </div>
+        {% endif %}
     {% endif %}
 
     {# comment body #}
@@ -28,5 +33,6 @@
             {% for error in comment_form.body.errors %} {{ error }} <br> {% endfor %}
         </div>
     {% endif %}
+
     <button type="submit" class="btn btn-dark col-12 btn-shadow">Отправить</button>
 </form>

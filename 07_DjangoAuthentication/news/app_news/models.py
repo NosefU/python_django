@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import truncatechars
+from django.conf import settings
 
 from .utils import GetUUIDName
 
@@ -31,6 +32,8 @@ class Comment(models.Model):
     body = models.TextField(max_length=600, verbose_name='Комментарий')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comments', verbose_name='Новость')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True,
+                             related_name='comments', verbose_name='Пользователь')
 
     @property
     def short_body(self):

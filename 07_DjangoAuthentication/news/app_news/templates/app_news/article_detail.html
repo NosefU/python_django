@@ -54,7 +54,11 @@
                     <div class="row justify-content-center">
                         <div class="card col gy-4" id="comment_{{ comment.id }}">
                             <div class="card-body">
-                                <h5 class="card-title">{{ comment.username }}</h5>
+                                {% if comment.user == None %}
+                                    <h5 class="card-title">{{ comment.username }}</h5>
+                                {% else %}
+                                    <h5 class="card-title">{{ comment.user.username }}</h5>
+                                {% endif %}
                                 <p class="card-text">{{ comment.body }}</p>
                                 <p class="card-text text-end"><small class="text-muted">
                                     {{ comment.created|timezone:"Europe/Moscow" }}</small></p>

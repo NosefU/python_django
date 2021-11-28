@@ -12,5 +12,6 @@ def navbar(context):
 
 @register.inclusion_tag('app_news/comment_form.html', takes_context=True)
 def comment_form(context, form: CommentForm):
-    return {'comment_form': form}
+    context.comment_form = form
+    return context
 
