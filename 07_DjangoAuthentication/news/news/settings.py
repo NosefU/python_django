@@ -125,3 +125,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 LOGIN_REDIRECT_URL = '/'
+
+SESSION_COOKIE_AGE = 30 * 24 * 60 * 60
