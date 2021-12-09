@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
 
 from app_news.models import Comment, Article
 
@@ -26,10 +25,3 @@ class CommentForm(forms.ModelForm):
         super(CommentForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'class': 'form-control',  'placeholder': 'Имя пользователя'})
         self.fields['body'].widget.attrs.update({'class': 'form-control',  'placeholder': 'Комментарий'})
-
-
-class NewsAuthForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super(NewsAuthForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-control',  'placeholder': 'Имя пользователя'})
-        self.fields['password'].widget.attrs.update({'class': 'form-control',  'placeholder': 'Пароль'})

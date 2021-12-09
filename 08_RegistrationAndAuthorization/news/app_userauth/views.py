@@ -1,13 +1,18 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.views import View
 
-from app_userauth.forms import RegisterForm
+from app_userauth.forms import NewsRegisterForm, NewsAuthForm
 
 
-class RegisterView(View):
+class NewsRegisterView(View):
+    def get(self, request):
+        form = NewsRegisterForm()
+        return render(request, 'app_userauth/register.html', context={'form': form})
+
     def post(self, request):
-        form = RegisterForm(request.POST)
+        form = NewsRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -18,6 +23,12 @@ class RegisterView(View):
         else:
             return render(request, 'app_userauth/register.html', context={'form': form})
 
-    def get(self, request):
-        form = RegisterForm()
-        return render(request, 'app_userauth/register.html', context={'form': form})
+
+class NewsLoginView(LoginView):
+    template_name = 'app_userauth/login.html'
+    authentication_form = NewsAuthForm
+
+
+class NewsLogoutView(LogoutView):
+    next_page = '/'
+

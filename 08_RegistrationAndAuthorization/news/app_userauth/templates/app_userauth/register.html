@@ -50,7 +50,7 @@
                     {{ form.password2 }}
                     <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
                     {% if not form.password2.errors %}
-                        <small class="text-muted mx-2">{{ form.password2.help_text }}</small><br>
+                        <small class="text-muted mx-2">{{ form.password2.help_text }}</small>
                     {% endif %}
                 </p>
                 {% if form.password2.errors %}
@@ -58,8 +58,6 @@
                         {% for error in form.password2.errors %} {{ error }} <br> {% endfor %}
                     </div>
                 {% endif %}
-
-
                 <button type="submit" class="btn btn-dark col-12 btn-shadow">Зарегистрироваться</button>
             </form>
         </div>

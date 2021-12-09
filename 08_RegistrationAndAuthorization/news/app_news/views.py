@@ -1,20 +1,11 @@
-from django.contrib.auth.views import LoginView, LogoutView
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView
 
-from app_news.forms import CommentForm, ArticleForm, NewsAuthForm
+from app_news.forms import CommentForm, ArticleForm
 from app_news.models import Article, Comment
-
-
-class NewsLoginView(LoginView):
-    template_name = 'app_news/login.html'
-    authentication_form = NewsAuthForm
-
-
-class NewsLogoutView(LogoutView):
-    next_page = '/'
 
 
 class ArticleList(ListView):
