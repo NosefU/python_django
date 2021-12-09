@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+{#    navbar    #}
+<div class="row bg-dark">
+    <div class="col navbar-col">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid navbar-container">
+                <a class="navbar-brand mb-0 h1" href="{% url 'article_list' %}">
+                    <img src="{% static 'img/logo.svg' %}" alt="" width="30" height="24"
+                         class="d-inline-block align-text-top logo-shadow">
+                    MetaNews
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" aria-current="page" href="{% url 'article_list' %}">На главную</a>
+                        <a class="nav-link" href="{% url 'add_article' %}">Предложить новость</a>
+                    </div>
+
+                </div>
+                <div class="navbar-nav">
+                    {% if not request.user.is_authenticated %}
+                        <a href="{% url 'login' %}" class="btn nav-link btn-login-logout">Войти</a>
+                    {% else %}
+                        <span class="navbar-text px-3">{{ request.user.username }}</span>
+                        <a href="{% url 'logout' %}" class="btn nav-link btn-login-logout">Выйти</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
