@@ -56,6 +56,15 @@
     position: relative;
 }
 
+.form-p:focus-within small {
+    display: initial;
+}
+
+.form-p small {
+    display: none;
+    white-space: pre-line;
+}
+
 .alert-field {
     margin-top: -1.5rem;
     z-index: 0;
