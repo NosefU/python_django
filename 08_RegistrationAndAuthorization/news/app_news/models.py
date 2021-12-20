@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import truncatechars
 from django.conf import settings
@@ -12,7 +13,11 @@ class Article(models.Model):
     body = models.TextField(verbose_name='Текст новости')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     modified = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
-    active = models.BooleanField(default=True, verbose_name='Опубликовано')
+    active = models.BooleanField(default=False, verbose_name='Опубликовано')
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name='articles', verbose_name='Автор')
+    moderator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,
+                             related_name='accepted_articles', verbose_name='Модератор')
 
     @property
     def active_text(self):
@@ -32,7 +37,7 @@ class Comment(models.Model):
     body = models.TextField(max_length=600, verbose_name='Комментарий')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comments', verbose_name='Новость')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True,
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,
                              related_name='comments', verbose_name='Пользователь')
 
     @property

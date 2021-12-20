@@ -13,19 +13,21 @@
                 <p class="fs-1 article-title">{{ article.subtitle }}</p>
             </div>
             <div class="row text-center justify-content-end">
-                <div class="col-4">
+                <div class="col-6">
                     <p>
-                        <small class="text-muted">{{ article.created|timezone:"Europe/Moscow" }}</small>
+                        <small class="text-muted">{{ article.created|timezone:"Europe/Moscow" }}&ensp;•&ensp;Автор: {{ article.author.username }}</small>
                     </p>
                 </div>
-                <div class="col-4">
-                    <div class="d-grid justify-content-end">
-                        <a class="btn btn-outline-dark btn-sm btn-shadow" href="{% url 'edit_article' article.id %}">Редактировать</a>
-                    </div>
+
+                <div class="col-3">
+                    {% if article.author == request.user %}
+                        <div class="d-grid justify-content-end">
+                            <a class="btn btn-outline-dark btn-sm btn-shadow" href="{% url 'edit_article' article.id %}">Редактировать</a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
-
 
         {#    picture    #}
         <div class="col-12 title-image-container">

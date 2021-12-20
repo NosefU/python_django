@@ -1,5 +1,11 @@
 from django.contrib import admin
 from app_news.models import Article, Comment
+from app_userauth.models import UserProfile
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in UserProfile._meta.get_fields()]
 
 
 @admin.register(Comment)
@@ -26,10 +32,10 @@ class ArticleAdmin(admin.ModelAdmin):
     actions = ['mark_as_active', 'mark_as_inactive']
 
     def mark_as_active(self, request, queryset):
-        queryset.update(active=True)
+        queryset.update(active=True, moderator=request.user)
 
     def mark_as_inactive(self, request, queryset):
-        queryset.update(active=False)
+        queryset.update(active=False, moderator=request.user)
 
     mark_as_active.short_description = 'Опубликовать'
     mark_as_inactive.short_description = 'Снять с публикации'

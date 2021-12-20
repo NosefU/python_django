@@ -1,4 +1,4 @@
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
@@ -44,7 +44,7 @@ class ArticleDetail(View):
         return HttpResponseRedirect(f'{request.path_info}#comment_{comment.id}')
 
 
-class AddArticle(View):
+class AddArticle(LoginRequiredMixin, View):
     def get(self, request):
         article_form = ArticleForm()
         context = {'article_form': article_form, 'title': 'Предложите свою новость'}
@@ -60,7 +60,7 @@ class AddArticle(View):
         return HttpResponseRedirect(f'/article/{article.id}')
 
 
-class EditArticle(View):
+class EditArticle(LoginRequiredMixin, View):
     def get(self, request, article_id):
         article = Article.objects.get(id=article_id)
         article_form = ArticleForm(instance=article)

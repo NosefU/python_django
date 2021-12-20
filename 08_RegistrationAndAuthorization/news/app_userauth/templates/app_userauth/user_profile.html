@@ -1,0 +1,78 @@
+{% extends 'base_container.html' %}
+
+{% block content %}
+    <div class="row justify-content-center content-container">
+        <div class="col-8 gy-4">
+            <div class="row text-center">
+                <h1>Профиль пользователя {{ request.user.username }}</h1>
+            </div>
+        </div>
+        {% if profile_is_saved %}
+            <div class="col-8 gy-2">
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-check-fill flex-shrink-0 me-2" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                    <div>
+                        Профиль успешно сохранён
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="col-8 gy-3">
+            <h5 style="display: contents;">Опубликовано новостей:</h5>
+            <p class="fs-5" style="display: contents;">  {{ request.user.profile.published_articles_number }}</p>
+        </div>
+
+
+        <div class="col-8 gy-3">
+            <form method="post">
+                {% csrf_token %}
+                {# all form errors #}
+                {% if profile.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in profile.non_field_errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# phone #}
+                <p class="form-floating form-p">
+                    {{ profile.phone }}
+                    <label for="{{ profile.phone.id_for_label }}">{{ profile.phone.label }}</label>
+                    {% if not profile.phone.errors %}
+                        <small class="text-muted mx-2">{{ profile.phone.help_text }}</small>
+                    {% endif %}
+                </p>
+                {% if profile.phone.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in profile.phone.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# city #}
+                <p class="form-floating form-p">
+                    {{ profile.city }}
+                    <label for="{{ profile.city.id_for_label }}">{{ profile.city.label }}</label>
+                    {% if not profile.city.errors %}
+                        <small class="text-muted mx-2">{{ profile.city.help_text }}</small>
+                    {% endif %}
+                </p>
+                {% if profile.city.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in profile.city.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# is_verified #}
+                <div class="form-check my-4">
+                    {{ profile.is_verified }}
+                    <label class="form-check-label" for="{{ profile.is_verified.id_for_label }}">
+                        {{ profile.is_verified.label }}
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-dark col-12 btn-shadow">Сохранить</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
