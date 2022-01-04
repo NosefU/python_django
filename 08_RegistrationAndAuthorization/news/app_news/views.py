@@ -12,7 +12,12 @@ from app_news.models import Article, Comment, ArticleTag
 class ArticleList(ListView):
     model = Article
     context_object_name = 'article_list'
-    queryset = Article.objects.filter(active=True)[:20]
+
+    def get_queryset(self):
+        if not self.request.GET.get('tag'):
+            return Article.objects.filter(active=True)[:20]
+        return Article.objects.filter(tag__name=self.request.GET['tag'], active=True)
+
 
 
 class UnpublishedArticleList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -77,6 +82,10 @@ class AddArticle(LoginRequiredMixin, View):
 class EditArticle(LoginRequiredMixin, View):
     def get(self, request, article_id):
         article = Article.objects.get(id=article_id)
+        if article.active:
+            raise PermissionDenied('Статья уже опубликована. Обратитесь к администратору')
+        if not request.user.has_perm('app_news.can_publish_article') and not article.author == request.user:
+            raise PermissionDenied('Недостаточно прав')
         article_form = ArticleForm(
             initial={'str_tag': getattr(article.tag, 'name', '')},
             instance=article)
@@ -85,6 +94,10 @@ class EditArticle(LoginRequiredMixin, View):
 
     def post(self, request, article_id):
         article = Article.objects.get(id=article_id)
+        if article.active:
+            raise PermissionDenied('Статья уже опубликована. Обратитесь к администратору')
+        if not request.user.has_perm('app_news.can_publish_article') and not article.author == request.user:
+            raise PermissionDenied('Недостаточно прав')
         article_form = ArticleForm(request.POST, request.FILES, instance=article)
         if not article_form.is_valid():
             context = {'article_form': article_form, 'title': 'Изменить новость'}
