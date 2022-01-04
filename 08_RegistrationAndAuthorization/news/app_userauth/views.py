@@ -1,9 +1,8 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
-from django.views import View
+from django.views import View, generic
 
 from app_userauth.forms import NewsRegisterForm, NewsAuthForm, UserProfileForm
 from app_userauth.models import UserProfile
@@ -38,13 +37,13 @@ class NewsLogoutView(LogoutView):
     next_page = '/'
 
 
-class UserProfileView(LoginRequiredMixin, View):
+class UserProfileEdit(LoginRequiredMixin, View):
     def get(self, request):
         profile = UserProfile.objects.get(id=request.user.id)
         profile_form = UserProfileForm(instance=profile)
         return render(
             request,
-            'app_userauth/user_profile.html',
+            'app_userauth/userprofile_edit.html',
             context={'profile': profile_form, 'profile_is_saved': False}
         )
 
@@ -58,12 +57,16 @@ class UserProfileView(LoginRequiredMixin, View):
             profile_form = UserProfileForm(instance=profile)
             return render(
                 request,
-                'app_userauth/user_profile.html',
+                'app_userauth/userprofile_edit.html',
                 context={'profile': profile_form, 'profile_is_saved': True}
             )
         else:
             return render(
                 request,
-                'app_userauth/user_profile.html',
+                'app_userauth/userprofile_edit.html',
                 context={'profile': profile_form, 'profile_is_saved': False}
             )
+
+
+class UserProfileDetail(generic.DetailView):
+    model = UserProfile
