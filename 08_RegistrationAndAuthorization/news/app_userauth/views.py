@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.models import Permission
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.views import View, generic
@@ -70,3 +71,13 @@ class UserProfileEdit(LoginRequiredMixin, View):
 
 class UserProfileDetail(generic.DetailView):
     model = UserProfile
+
+
+class UserProfileVerify(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = "app_userauth.can_verify_userprofile"
+
+    def get(self, request, user_id):
+        profile = UserProfile.objects.get(id=user_id)
+        profile.is_verified = True
+        profile.save()
+        return redirect(request.META.get('HTTP_REFERER', ''))

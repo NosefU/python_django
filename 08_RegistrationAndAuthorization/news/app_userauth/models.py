@@ -15,3 +15,6 @@ class UserProfile(models.Model):
     @property
     def published_articles_number(self):
         return self.user.articles.filter(active=True).count()
+
+    class Meta:
+        permissions = (('can_verify_userprofile', 'Может верифицировать пользователей'),)
