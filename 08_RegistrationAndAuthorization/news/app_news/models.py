@@ -27,6 +27,7 @@ class Article(models.Model):
 
     class Meta:
         ordering = ['-created', ]
+        permissions = (('can_publish_article', 'Может публиковать новости'),)
 
     def __str__(self):
         return f'{self.title} | {self.created.strftime("%Y-%m-%d %H:%M:%S")} | {self.active_text}'

@@ -12,25 +12,32 @@
                 <h1 class="article-title">{{ article.title }} </h1>
                 <p class="fs-1 article-title">{{ article.subtitle }}</p>
             </div>
-            <div class="row text-center justify-content-end">
-                <div class="col-6">
-                    <p>
-                        <small class="text-muted">{{ article.created|timezone:"Europe/Moscow" }}&ensp;•&ensp;Автор: {{ article.author.username }}</small>
-                    </p>
-                </div>
-
-                <div class="col-3">
-                    {% if article.author == request.user %}
-                        <div class="d-grid justify-content-end">
+            <div class="row text-center justify-content-center">
+                <small class="text-muted">{{ article.created|timezone:"Europe/Moscow" }}&ensp;•&ensp;Автор: {{ article.author.username }}</small>
+            </div>
+        </div>
+        {#    editing/moderating panel    #}
+        {% if article.author == request.user or perms.app_news.can_publish_article %}
+            <div class="col-8 gy-4">
+                <div class="row justify-content-center">
+                    {#    edit button    #}
+                    {% if article.author == request.user and not article.active %}
+                        <div class="col-2">
                             <a class="btn btn-outline-dark btn-sm btn-shadow" href="{% url 'edit_article' article.id %}">Редактировать</a>
+                        </div>
+                    {% endif %}
+                    {#   publicate button   #}
+                    {% if not article.active and perms.app_news.can_publish_article %}
+                        <div class="col-2">
+                            <a class="btn btn-outline-dark btn-sm btn-shadow" href="{% url 'publish_article' article_id=article.id %}">Опубликовать</a>
                         </div>
                     {% endif %}
                 </div>
             </div>
-        </div>
+        {% endif %}
 
         {#    picture    #}
-        <div class="col-12 title-image-container">
+        <div class="col-12 gy-4 title-image-container">
             <img src="{{ article.image.url }}" class="title-image" alt="...">
         </div>
 
@@ -60,7 +67,7 @@
                                     {#    anonymous comment, adding annon badge   #}
                                     <div class="card-title">
                                         <span class="h5 card-title align-middle">{{ comment.username }}</span>
-                                        <span class="badge bg-secondary mx-1 align-middle" >Аноним</span>
+                                        <span class="badge bg-secondary mx-1 align-middle">Аноним</span>
                                     </div>
                                 {% else %}
                                     {#    registered user comment   #}
