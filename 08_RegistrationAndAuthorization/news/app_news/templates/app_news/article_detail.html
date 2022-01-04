@@ -6,14 +6,20 @@
 {% block content %}
     {#    content    #}
     <div class="row justify-content-center content-container article-container">
-        {#    title and date    #}
         <div class="col-8 gy-4">
+            {#    title, subtitle    #}
             <div class="row text-center">
                 <h1 class="article-title">{{ article.title }} </h1>
                 <p class="fs-1 article-title">{{ article.subtitle }}</p>
             </div>
+            {#    article meta: publication date, author and tag    #}
             <div class="row text-center justify-content-center">
-                <small class="text-muted">{{ article.created|timezone:"Europe/Moscow" }}&ensp;•&ensp;Автор: {{ article.author.username }}
+                <small class="text-muted">
+                    <a href="{% url 'article_list' %}?date={{  article.created|date:'Y-m-d' }}" class="text-muted">
+                        {{ article.created|timezone:"Europe/Moscow" }}</a>
+                    &ensp;•&ensp;Автор:
+                    <a href="{% url 'user_profile_detail' pk=article.author.id %}" class="text-muted">
+                        {{ article.author.username }}</a>
                     {% if article.tag %}
                         &ensp;•&ensp;
                         <a href="{% url 'article_list' %}?tag={{  article.tag.name }}">

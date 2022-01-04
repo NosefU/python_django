@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
@@ -14,10 +16,14 @@ class ArticleList(ListView):
     context_object_name = 'article_list'
 
     def get_queryset(self):
-        if not self.request.GET.get('tag'):
-            return Article.objects.filter(active=True)[:20]
-        return Article.objects.filter(tag__name=self.request.GET['tag'], active=True)
-
+        filter_params = {}
+        if self.request.GET.get('tag'):
+            filter_params['tag__name'] = self.request.GET['tag']
+        if self.request.GET.get('date'):
+            start_date = datetime.datetime.strptime(self.request.GET.get('date'), '%Y-%m-%d')
+            end_date = start_date + datetime.timedelta(days=1)
+            filter_params['created__range'] = [start_date, end_date]
+        return Article.objects.filter(**filter_params, active=True)
 
 
 class UnpublishedArticleList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
