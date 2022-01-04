@@ -41,6 +41,17 @@
                     </div>
                 </div>
             {% endif %}
+        {% else %}
+            <div class="col-8 gy-4">
+                <div class="row justify-content-center">
+                    {#   cancel publication button   #}
+                    {% if perms.app_news.can_publish_article %}
+                        <div class="col-3 text-center">
+                            <a class="btn btn-outline-dark btn-sm btn-shadow" href="{% url 'cancel_publishing_article' article_id=article.id %}">Снять с публикации</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
 
         {#    picture    #}

@@ -117,3 +117,14 @@ class PublishArticle(LoginRequiredMixin, PermissionRequiredMixin, View):
         article.moderator = request.user
         article.save()
         return redirect(request.META.get('HTTP_REFERER', ''))
+
+
+class CancelPublishingArticle(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = "app_news.can_publish_article"
+
+    def get(self, request, article_id):
+        article = Article.objects.get(id=article_id)
+        article.active = False
+        article.moderator = request.user
+        article.save()
+        return redirect(request.META.get('HTTP_REFERER', ''))
