@@ -9,6 +9,7 @@ from django.views.generic import ListView
 
 from app_news.forms import CommentForm, ArticleForm
 from app_news.models import Article, Comment, ArticleTag
+from app_userauth.models import UserProfile
 
 
 class ArticleList(ListView):
@@ -68,11 +69,15 @@ class ArticleDetail(View):
 
 class AddArticle(LoginRequiredMixin, View):
     def get(self, request):
+        if not request.user.profile.is_verified:
+            raise PermissionDenied()
         article_form = ArticleForm()
         context = {'article_form': article_form, 'title': 'Предложите свою новость'}
         return render(request, 'app_news/article_edit.html', context=context)
 
     def post(self, request):
+        if not request.user.profile.is_verified:
+            raise PermissionDenied()
         article_form = ArticleForm(request.POST, request.FILES)
         if not article_form.is_valid():
             context = {'article_form': article_form, 'title': 'Предложите свою новость'}
