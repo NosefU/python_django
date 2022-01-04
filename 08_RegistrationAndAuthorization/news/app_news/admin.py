@@ -1,11 +1,16 @@
 from django.contrib import admin
-from app_news.models import Article, Comment
+from app_news.models import Article, Comment, ArticleTag
 from app_userauth.models import UserProfile
 
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = [field.name for field in UserProfile._meta.get_fields()]
+
+
+@admin.register(ArticleTag)
+class TagAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Comment)
@@ -27,7 +32,7 @@ class CommentInline(admin.TabularInline):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'subtitle', 'image', 'created', 'modified', 'active']
-    list_filter = ['active']
+    list_filter = ['active', 'tag']
     inlines = [CommentInline, ]
     actions = ['mark_as_active', 'mark_as_inactive']
 

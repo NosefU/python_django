@@ -60,6 +60,18 @@
                         {% for error in article_form.body.errors %} {{ error }} <br> {% endfor %}
                     </div>
                 {% endif %}
+
+                {# tag #}
+                <p class="form-floating form-p">
+                    {{ article_form.str_tag }}
+                    <label for="{{ article_form.str_tag.id_for_label }}">Тег</label>
+                </p>
+                {% if article_form.str_tag.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in article_form.str_tag.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
                 <button type="submit" class="btn btn-dark col-12 btn-shadow">Отправить</button>
             </form>
         </div>

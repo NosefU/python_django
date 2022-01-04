@@ -16,8 +16,11 @@ class Article(models.Model):
     active = models.BooleanField(default=False, verbose_name='Опубликовано')
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='articles', verbose_name='Автор')
+    # TODO реализовать изменение модератора при публикации новости
     moderator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,
                              related_name='accepted_articles', verbose_name='Модератор')
+    tag = models.ForeignKey('ArticleTag', on_delete=models.CASCADE, null=True, blank=True,
+                            related_name='tagged_articles', verbose_name='Тег')
 
     @property
     def active_text(self):
@@ -50,3 +53,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.username} | {self.short_body}'
+
+
+class ArticleTag(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Имя тега')
+
+    def __str__(self):
+        return f'{self.name}'

@@ -6,7 +6,7 @@ from django.views import View
 from django.views.generic import ListView
 
 from app_news.forms import CommentForm, ArticleForm
-from app_news.models import Article, Comment
+from app_news.models import Article, Comment, ArticleTag
 
 
 class ArticleList(ListView):
@@ -74,7 +74,9 @@ class AddArticle(LoginRequiredMixin, View):
 class EditArticle(LoginRequiredMixin, View):
     def get(self, request, article_id):
         article = Article.objects.get(id=article_id)
-        article_form = ArticleForm(instance=article)
+        article_form = ArticleForm(
+            initial={'str_tag': getattr(article.tag, 'name', '')},
+            instance=article)
         context = {'article_form': article_form, 'title': 'Изменить новость'}
         return render(request, 'app_news/article_edit.html', context=context)
 
@@ -85,6 +87,7 @@ class EditArticle(LoginRequiredMixin, View):
             context = {'article_form': article_form, 'title': 'Изменить новость'}
             return render(request, 'app_news/article_edit.html', context=context)
 
+        article.tag, _ = ArticleTag.objects.get_or_create(name=article_form.cleaned_data['str_tag'])
         article.save()
         return HttpResponseRedirect(f'/article/{article.id}')
 
