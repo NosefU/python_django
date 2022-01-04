@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import truncatechars
-from django.conf import settings
 
 from .utils import GetUUIDName
 
@@ -16,7 +15,6 @@ class Article(models.Model):
     active = models.BooleanField(default=False, verbose_name='Опубликовано')
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='articles', verbose_name='Автор')
-    # TODO реализовать изменение модератора при публикации новости
     moderator = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True,
                              related_name='accepted_articles', verbose_name='Модератор')
     tag = models.ForeignKey('ArticleTag', on_delete=models.CASCADE, null=True, blank=True,

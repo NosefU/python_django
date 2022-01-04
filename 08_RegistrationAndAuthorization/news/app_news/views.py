@@ -67,6 +67,9 @@ class AddArticle(LoginRequiredMixin, View):
             context = {'article_form': article_form, 'title': 'Предложите свою новость'}
             return render(request, 'app_news/article_edit.html', context=context)
 
+        article_form.cleaned_data['tag'], _ = ArticleTag.objects.get_or_create(name=article_form.cleaned_data['str_tag'])
+        article_form.cleaned_data.pop('str_tag')
+        article_form.cleaned_data['author'] = request.user
         article = Article.objects.create(**article_form.cleaned_data)
         return HttpResponseRedirect(f'/article/{article.id}')
 
@@ -98,5 +101,6 @@ class PublishArticle(LoginRequiredMixin, PermissionRequiredMixin, View):
     def get(self, request, article_id):
         article = Article.objects.get(id=article_id)
         article.active = True
+        article.moderator = request.user
         article.save()
         return redirect(request.META.get('HTTP_REFERER', ''))
