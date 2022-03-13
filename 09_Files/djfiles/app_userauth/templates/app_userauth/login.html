@@ -1,0 +1,46 @@
+{% extends 'base_container.html' %}
+
+{% block content %}
+    <div class="row justify-content-center content-container">
+        <div class="col-8 gy-4">
+            <div class="row text-center">
+                <h1>Авторизация</h1>
+            </div>
+        </div>
+        <div class="col-8 gy-2">
+            <form method="post">
+                {% csrf_token %}
+                {# all form errors #}
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# username #}
+                <p class="form-floating form-p">
+                    {{ form.username }}
+                    <label for="{{ form.username.id_for_label }}">Логин</label>
+                </p>
+                {% if form.username.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in form.username.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# password #}
+                <p class="form-floating form-p">
+                    {{ form.password }}
+                    <label for="{{ form.password.id_for_label }}">Пароль</label>
+                </p>
+                {% if form.password.errors %}
+                    <div class="alert alert-danger alert-field" role="alert">
+                        {% for error in form.password.errors %} {{ error }} <br> {% endfor %}
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn btn-primary col-12">Войти</button>
+            </form>
+        <a href="{% url 'register' %}" class="btn btn-outline-primary col-12 my-3">Зарегистрироваться</a>
+        </div>
+    </div>
+{% endblock content %}

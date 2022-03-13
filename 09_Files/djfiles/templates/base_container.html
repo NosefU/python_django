@@ -1,0 +1,26 @@
+{% load staticfiles %}
+{% load common_tags %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog_styles.css' %}">
+
+    <title>SimpleBlog</title>
+</head>
+<body class="">
+
+<div class="container-md">
+    {% navbar %}
+
+    {% block content %}
+    {% endblock content %}
+</div>
+
+</body>
+</html>

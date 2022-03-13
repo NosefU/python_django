@@ -1,0 +1,30 @@
+{% extends 'base_container.html' %}
+
+{% block content %}
+
+     <div class="row justify-content-center content-container">
+        <div class="col-8 gy-4">
+            <div class="row text-center">
+                <h1>Профиль пользователя {{ object.user.username }}</h1>
+            </div>
+        </div>
+        <div class="col-8 gy-3 fs-5">
+            <dl class="row">
+              <dt class="col-sm-2">Имя</dt>
+              <dd class="col-sm-10">{{ object.first_name }}</dd>
+
+              <dt class="col-sm-2">Фамилия</dt>
+              <dd class="col-sm-10">{{ object.last_name }}</dd>
+
+              <dt class="col-sm-2">О себе</dt>
+              <dd class="col-sm-10">{{ object.about }}</dd>
+            </dl>
+        </div>
+         {% if object.user.id == request.user.id %}
+             <div class="col-8 gy-4">
+                    <a href="{% url 'user_profile_edit' %}" class="btn btn-primary col-12">Редактировать</a>
+                </div>
+        {% endif %}
+     </div>
+
+{% endblock content %}
