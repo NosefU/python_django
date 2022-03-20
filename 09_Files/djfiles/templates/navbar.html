@@ -38,6 +38,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="{% url 'user_profile_detail' pk=request.user.id %}">Профиль</a></li>
                                 <li><a class="dropdown-item" href="{% url 'add_record' %}">Создать пост</a></li>
+                                <li><a class="dropdown-item" href="{% url 'batch_add_record' %}">Пакетное добавление постов</a></li>
                                 <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
                             </ul>
                         </div>
