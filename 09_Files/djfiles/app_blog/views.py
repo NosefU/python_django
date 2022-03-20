@@ -1,35 +1,42 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View, generic
 
 from app_blog.forms import BlogRecordForm
-from app_blog.models import BlogRecord
+from app_blog.models import BlogRecord, BlogImage
 
 
-class EditBlogRecord(LoginRequiredMixin, View):
-    def get(self, request, record_id):
-        record = BlogRecord.objects.get(id=record_id)
-        images = BlogRecord.image.all()
-        init_form_data = {
-            'title': record.title,
-            'body': record.body,
-            'images': images
-        }
-        record_form = BlogRecordForm(
-            initial={'str_tag': getattr(article.tag, 'name', '')})
-        context = {'article_form': article_form, 'title': 'Изменить новость'}
-        return render(request, 'app_news/article_edit.html', context=context)
+class AddBlogRecord(LoginRequiredMixin, View):
+    def get(self, request):
+        record_form = BlogRecordForm()
+        context = {'form': record_form, 'title': 'Создать пост'}
+        return render(request, 'app_blog/blogrecord_edit.html', context=context)
+
+    def post(self, request):
+        record_form = BlogRecordForm(request.POST, request.FILES)
+        if not record_form.is_valid():
+            context = {'form': record_form, 'title': 'Создать пост'}
+            return render(request, 'app_blog/blogrecord_edit.html', context=context)
+
+        record = BlogRecord(
+            title=record_form.cleaned_data['title'],
+            body=record_form.cleaned_data['body'],
+            author=request.user
+        )
+        record.save()
+        for f in record_form.files.getlist('images'):
+            image = BlogImage(
+                image=f,
+                record=record
+            )
+            image.save()
+        return HttpResponseRedirect(f'/record/{record.id}')
 
 
 class BlogRecordListView(generic.ListView):
     model = BlogRecord
 
+
 class BlogRecordDetailView(generic.DetailView):
     model = BlogRecord
-
-
-    # def get(self, request, record_id):
-    #     record = BlogRecord.objects.get(id=record_id)
-    #     images = record.images.all()
-    #     return HttpResponse(str(record) + str(images))
