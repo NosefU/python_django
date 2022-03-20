@@ -63,14 +63,17 @@ class BatchAddBlogRecord(LoginRequiredMixin, View):
         for row in reader:
             record = BlogRecord(
                 body=row['body'],
+                title=row.get('title'),
+                cover=row.get('cover'),
                 author=request.user
             )
             record.save()
-            try:
-                record.created = datetime.strptime(row['date'], "%Y-%m-%d %H:%M:%S")
-            except ValueError:
-                records_form.add_error('posts_file', f'Invalid datetime format in row "{row["date"]};{row["body"]}"')
-                context = {'form': records_form}
-                return render(request, 'app_blog/blogrecord_batch_add.html', context=context)
-            record.save()
+            if row.get('date'):
+                try:
+                    record.created = datetime.strptime(row['date'], "%Y-%m-%d %H:%M:%S")
+                except ValueError:
+                    records_form.add_error('posts_file', f'Invalid datetime format in row "{row["date"]};{row["body"]}"')
+                    context = {'form': records_form}
+                    return render(request, 'app_blog/blogrecord_batch_add.html', context=context)
+                record.save()
         return HttpResponseRedirect('/')

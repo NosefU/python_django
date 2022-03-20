@@ -32,7 +32,11 @@
                     {#   обложка (если есть)   #}
                     {% if object.cover %}
                         <div class="thumb-post">
-                        <img src="{{ object.cover.url }}" alt="КДПВ" class="rounded-3">
+                        {% if object.cover.name|slice:":7" == "http://" or object.cover.name|slice:":8" == "https://" %}
+                            <img src="{{ object.cover.name }}" alt="КДПВ" class="rounded-3">
+                        {% else %}
+                            <img src="{{ object.cover.url }}" alt="КДПВ" class="rounded-3">
+                        {%  endif %}
                         </div>
                     {% endif %}
 
