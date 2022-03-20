@@ -81,29 +81,14 @@
     justify-content: flex-end;
 }
 
-
-
-
-
-
-
-
+a {
+    color: var(--bs-gray-700);
+    text-decoration: none;
+}
 
 body {
     color: var(--bs-gray-700);
 }
-
-/*.profile-navbar .nav-item .nav-link {*/
-/*  color: #6c7293;*/
-/*}*/
-
-/*.profile-navbar .nav-item .nav-link.active {*/
-/*  color: #464dee;*/
-/*}*/
-
-/*.profile-navbar .nav-item .nav-link i {*/
-/*  font-size: 1.25rem;*/
-/*}*/
 
 .profile-feed-item {
   padding: 1.5rem 0;
@@ -112,4 +97,12 @@ body {
 .img-sm {
     width: 43px;
     height: 43px;
+}
+
+.thumb-post img {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  max-height: 250px;
+  margin-bottom: 1rem;
 }

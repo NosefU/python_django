@@ -2,7 +2,7 @@
 {% block content %}
 {% load tz %}
 
-    <div class="row row-cols-1 row-cols-md-1 content-container justify-content-center">
+    <div class="row content-container col-10">
 
         {% for object in object_list %}
             {#   карточка   #}
@@ -18,7 +18,9 @@
 
                     {#   заголовок #}
                     {% if object.title %}
-                        <h4>{{ object.title }}</h4>
+                        <a href="{% url 'record_page' object.id %}">
+                            <h4>{{ object.title }}</h4>
+                        </a>
                     {% endif %}
 
                     {# юзернейм и дата публикации #}
@@ -28,19 +30,24 @@
                     </h6>
 
                     {#   обрезанный текст поста   #}
-                    <p>{{ object.body|linebreaksbr|truncatechars:100 }} </p>
+                    <p>
+                        {{ object.body|linebreaksbr|truncatechars:400 }}
+                        <br>
+                        <a href="{% url 'record_page' object.id %}" class="btn btn-outline-primary mt-2">Читать дальше →</a>
+                    </p>
 
                     {#   первая картинка (если есть)   #}
                     {% if object.images.first %}
-                        <img src="{{ object.images.first.image.url }}" alt="КДПВ" class="rounded mw-100" style="max-height: 20rem">
+                        <div class="thumb-post">
+                        <img src="{{ object.images.first.image.url }}" alt="КДПВ" class="rounded">
+                        </div>
                     {% endif %}
 
 
                 </div>
             </div>
-        </div>
     {% endfor %}
-
+</div>
 
 {% endblock content %}
 

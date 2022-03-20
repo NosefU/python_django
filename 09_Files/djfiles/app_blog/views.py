@@ -25,6 +25,9 @@ class EditBlogRecord(LoginRequiredMixin, View):
 class BlogRecordListView(generic.ListView):
     model = BlogRecord
 
+class BlogRecordDetailView(generic.DetailView):
+    model = BlogRecord
+
 
     # def get(self, request, record_id):
     #     record = BlogRecord.objects.get(id=record_id)
