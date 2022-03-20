@@ -13,7 +13,7 @@
             </a>
 
             {#   запись   #}
-            <div class="ms-4">
+            <div class="col-11 ms-4">
 
                 {#   заголовок #}
                 {% if object.title %}
@@ -68,7 +68,7 @@
                 {% endif %}
 
                 {#   текст поста   #}
-                <p>{{ object.body|linebreaksbr }} </p>
+                <p>{{ object.body|safe }} </p>
             </div>
         </div>
     </div>

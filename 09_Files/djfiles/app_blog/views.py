@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views import View, generic
 
 from app_blog.forms import BlogRecordForm
-from app_blog.models import BlogRecord, BlogImage
+from app_blog.models import BlogRecord
 
 
 class AddBlogRecord(LoginRequiredMixin, View):
@@ -22,15 +22,10 @@ class AddBlogRecord(LoginRequiredMixin, View):
         record = BlogRecord(
             title=record_form.cleaned_data['title'],
             body=record_form.cleaned_data['body'],
+            cover=record_form.cleaned_data['cover'],
             author=request.user
         )
         record.save()
-        for f in record_form.files.getlist('images'):
-            image = BlogImage(
-                image=f,
-                record=record
-            )
-            image.save()
         return HttpResponseRedirect(f'/record/{record.id}')
 
 

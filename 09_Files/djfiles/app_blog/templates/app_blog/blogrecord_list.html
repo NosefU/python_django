@@ -14,7 +14,7 @@
                 </a>
 
                 {#   запись   #}
-                <div class="ms-4">
+                <div class="col-11 ms-4">
 
                     {#   заголовок #}
                     {% if object.title %}
@@ -29,19 +29,18 @@
                         <small class="ms-3 text-muted">{{ object.created|timezone:"Europe/Moscow" }}</small>
                     </h6>
 
-                    {#   обрезанный текст поста   #}
-                    <p>
-                        {{ object.body|linebreaksbr|truncatechars:400 }}
-                        <br>
-                        <a href="{% url 'record_page' object.id %}" class="btn btn-outline-primary mt-2">Читать дальше →</a>
-                    </p>
-
-                    {#   первая картинка (если есть)   #}
-                    {% if object.images.first %}
+                    {#   обложка (если есть)   #}
+                    {% if object.cover %}
                         <div class="thumb-post">
-                        <img src="{{ object.images.first.image.url }}" alt="КДПВ" class="rounded-3">
+                        <img src="{{ object.cover.url }}" alt="КДПВ" class="rounded-3">
                         </div>
                     {% endif %}
+
+                    {#   обрезанный текст поста   #}
+                    {{ object.body|truncatechars_html:400|safe }}
+                    <p>
+                        <a href="{% url 'record_page' object.id %}" class="btn btn-outline-primary">Читать дальше →</a>
+                    </p>
 
                 </div>
             </div>

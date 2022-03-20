@@ -10,6 +10,7 @@ class BlogRecord(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='records', verbose_name='Автор')
+    cover = models.ImageField(upload_to='blog_images', blank=True, verbose_name='Обложка')
 
     class Meta:
         ordering = ['-created', ]
