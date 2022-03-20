@@ -1,0 +1,46 @@
+{% extends 'base_container.html' %}
+{% block content %}
+{% load tz %}
+
+    <div class="row row-cols-1 row-cols-md-1 content-container justify-content-center">
+
+        {% for object in object_list %}
+            {#   карточка   #}
+            <div class="d-flex align-items-start profile-feed-item">
+
+                {#   аватар   #}
+                <a href="{% url 'user_profile_detail' object.author.id %}">
+                    <img src="{{ object.author.profile.avatar.url }}" alt="profile" class="img-sm rounded-circle">
+                </a>
+
+                {#   запись   #}
+                <div class="ms-4">
+
+                    {#   заголовок #}
+                    {% if object.title %}
+                        <h4>{{ object.title }}</h4>
+                    {% endif %}
+
+                    {# юзернейм и дата публикации #}
+                    <h6>
+                        <a href="{% url 'user_profile_detail' object.author.id %}">{{ object.author.username }}</a>
+                        <small class="ms-3 text-muted">{{ object.created|timezone:"Europe/Moscow" }}</small>
+                    </h6>
+
+                    {#   обрезанный текст поста   #}
+                    <p>{{ object.body|linebreaksbr|truncatechars:100 }} </p>
+
+                    {#   первая картинка (если есть)   #}
+                    {% if object.images.first %}
+                        <img src="{{ object.images.first.image.url }}" alt="КДПВ" class="rounded mw-100" style="max-height: 20rem">
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock content %}
+

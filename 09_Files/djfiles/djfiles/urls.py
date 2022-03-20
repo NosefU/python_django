@@ -21,7 +21,8 @@ from djfiles import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('app_userauth.urls'))
+    path('', include('app_userauth.urls')),
+    path('', include('app_blog.urls'))
 ]
 
 if settings.DEBUG:
