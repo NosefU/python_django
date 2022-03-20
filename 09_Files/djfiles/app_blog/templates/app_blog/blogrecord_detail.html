@@ -2,7 +2,7 @@
 {% block content %}
 {% load tz %}
 
-    <div class="row row-cols-1 row-cols-md-1 content-container justify-content-center">
+    <div class="row content-container col-10 offset-md-1">
 
         {#   карточка   #}
         <div class="d-flex align-items-start profile-feed-item">
@@ -46,16 +46,15 @@
                         </div>
                         <div class="carousel-inner">
                             {% for image in object.images.all %}
-
                                 {% if forloop.counter0 == 0  %}
                                     <div class="carousel-item active">
                                 {% else %}
                                     <div class="carousel-item">
                                 {% endif %}
                                 <img src="{{ image.image.url }}" class="d-block w-100" alt="...">
-                          </div>
-
+                                </div>
                             {% endfor %}
+
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#postCarousel"  data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -70,11 +69,9 @@
 
                 {#   текст поста   #}
                 <p>{{ object.body|linebreaksbr }} </p>
-
             </div>
         </div>
     </div>
 
 
 {% endblock content %}
-
