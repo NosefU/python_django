@@ -99,6 +99,11 @@ body {
     height: 43px;
 }
 
+.img-nav {
+    width: 24px;
+    height: 24px;
+}
+
 .thumb-post img {
   object-fit: cover; /* Do not scale the image */
   object-position: center; /* Center the image within the element */
