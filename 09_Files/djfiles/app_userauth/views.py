@@ -48,14 +48,10 @@ class UserProfileEdit(LoginRequiredMixin, View):
         )
 
     def post(self, request):
-        profile_form = UserProfileForm(request.POST)
+        profile = UserProfile.objects.get(user=request.user)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=profile)
         if profile_form.is_valid():
-            profile = UserProfile.objects.get(user=request.user)
-            profile.first_name = profile_form.cleaned_data['first_name']
-            profile.last_name = profile_form.cleaned_data['last_name']
-            profile.about = profile_form.cleaned_data['about']
             profile.save()
-            profile_form = UserProfileForm(instance=profile)
             return render(
                 request,
                 'app_userauth/userprofile_edit.html',

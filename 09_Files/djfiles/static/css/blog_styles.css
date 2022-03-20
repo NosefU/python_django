@@ -74,6 +74,8 @@
     display: contents;
 }
 
-.btn-shadow {
-    box-shadow: 1px 1px 0 1px gold;
+.profile-avatar-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
 }

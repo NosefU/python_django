@@ -31,10 +31,11 @@ class UserAuthForm(AuthenticationForm):
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['first_name', 'last_name', 'about']
+        fields = ['first_name', 'last_name', 'about', 'avatar']
 
     def __init__(self, *args, **kwargs):
         super(ModelForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Имя'})
         self.fields['last_name'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Фамилия'})
         self.fields['about'].widget.attrs.update({'class': 'form-control', 'placeholder': 'О себе'})
+        self.fields['avatar'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Аватар'})
