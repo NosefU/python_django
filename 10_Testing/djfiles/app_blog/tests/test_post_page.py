@@ -39,5 +39,4 @@ class PostsFeedTest(TestCase):
         response = self.client.get(reverse('record_page', kwargs={'pk': self.TEST_POST.id}))
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(response.context.get('object'))
-        posts = BlogRecord.objects.all()
         self.assertEqual(response.context['object'], self.TEST_POST)

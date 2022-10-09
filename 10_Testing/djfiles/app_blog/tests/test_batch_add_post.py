@@ -24,7 +24,6 @@ class BatchAddBlogRecordTest(TestCase):
         )
     }
 
-
     @classmethod
     def setUpTestData(cls):
         cls.test_user = User.objects.create(username=cls.TEST_USER_CREDS['username'])

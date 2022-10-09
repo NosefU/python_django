@@ -43,4 +43,6 @@ class RegisterUserTest(TestCase):
         self.assertEqual(response.status_code, 302,
                          f'Form error: {dict(form_errors)}' if form_errors else None)
         self.assertEqual(len(User.objects.all()), 1, 'User is not added to the database or added many times')
-        self.assertEqual(len(UserProfile.objects.all()), 1, 'UserProfile is not added to the database or added many times')
+        self.assertEqual(
+            len(UserProfile.objects.all()), 1,
+            'UserProfile is not added to the database or added many times')
