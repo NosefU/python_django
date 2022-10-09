@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.test import TestCase
 from django.urls import reverse
 
@@ -27,6 +28,8 @@ class LoginTest(TestCase):
         self.assertTemplateUsed('app_userauth/login.html')
 
     def test_login(self):
+        sessions_before_login = len(Session.objects.all())
+
         response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
 
@@ -42,6 +45,6 @@ class LoginTest(TestCase):
             form_errors = dict(response.context['form'].errors)
         self.assertEqual(response.status_code, 302,
                          f'Form error: {dict(form_errors)}' if form_errors else None)
-        self.assertTrue(self.test_user.is_authenticated)
 
-
+        sessions_after_login = len(Session.objects.all())
+        self.assertGreaterEqual(sessions_after_login - sessions_before_login, 1, 'User not logged in')
