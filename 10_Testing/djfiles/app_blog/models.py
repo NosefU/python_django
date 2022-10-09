@@ -14,7 +14,7 @@ class BlogRecord(models.Model):
         ordering = ['-created', ]
 
     def __repr__(self):
-        return f"BlogRecord {self.id}: user {self.author_id}, {self.title}"
+        return f"BlogRecord {self.id}: user {self.author.id}, {self.title}"
 
     def __str__(self):
         return self.__repr__()
