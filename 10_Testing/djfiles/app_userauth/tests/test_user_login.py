@@ -25,7 +25,7 @@ class LoginTest(TestCase):
     def test_uses_correct_template(self):
         response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed('app_userauth/login.html')
+        self.assertTemplateUsed(response, 'app_userauth/login.html')
 
     def test_login(self):
         sessions_before_login = len(Session.objects.all())

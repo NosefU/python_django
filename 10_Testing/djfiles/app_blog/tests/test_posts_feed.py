@@ -43,7 +43,7 @@ class PostsFeedTest(TestCase):
     def test_feed_uses_correct_template(self):
         response = self.client.get(reverse('records_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed('app_blog/blogrecord_list.html')
+        self.assertTemplateUsed(response, 'app_blog/blogrecord_list.html')
 
     def test_feed_uses_correct_context(self):
         response = self.client.get(reverse('records_list'))

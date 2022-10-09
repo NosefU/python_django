@@ -21,7 +21,7 @@ class RegisterUserTest(TestCase):
     def test_uses_correct_template(self):
         response = self.client.get(reverse('register'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed('app_userauth/login.html')
+        self.assertTemplateUsed(response, 'app_userauth/register.html')
 
     def test_register(self):
         response = self.client.get(reverse('register'))

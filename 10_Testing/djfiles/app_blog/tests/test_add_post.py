@@ -44,7 +44,7 @@ class AddBlogRecordTest(TestCase):
     def test_uses_correct_template(self):
         response = self.client.get(reverse('add_record'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed('app_blog/blogrecord_edit.html')
+        self.assertTemplateUsed(response, 'app_blog/blogrecord_edit.html')
 
     def test_login_required(self):
         response = self.client.get(reverse('add_record'))

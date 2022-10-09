@@ -31,9 +31,9 @@ class PostsFeedTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_post_uses_correct_template(self):
-        response = self.client.get(reverse('records_list'))
+        response = self.client.get(reverse('record_page', kwargs={'pk': self.TEST_POST.id}))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed('app_blog/blogrecord_detail.html')
+        self.assertTemplateUsed(response, 'app_blog/blogrecord_detail.html')
 
     def test_post_page_uses_correct_context(self):
         response = self.client.get(reverse('record_page', kwargs={'pk': self.TEST_POST.id}))
