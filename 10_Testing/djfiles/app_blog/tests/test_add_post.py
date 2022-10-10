@@ -29,9 +29,11 @@ class AddBlogRecordTest(TestCase):
         cls.test_user = User.objects.create(username=cls.TEST_USER_CREDS['username'])
         cls.test_user.set_password(cls.TEST_USER_CREDS['password'])
         cls.test_user.save()
+        # TODO для всего этого есть специальный метод - User.objects.create_user
 
     def setUp(self):
-        self.client.force_login(self.test_user)
+        self.client.force_login(self.test_user)  # TODO стоило придумать более сложный пароль и пользоваться login
+                                                 #  вместо force_login
 
     def tearDown(self):
         self.client.logout()
@@ -42,6 +44,7 @@ class AddBlogRecordTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_uses_correct_template(self):
+        # TODO лишний тест, в этом представлении ведь не разные шаблоны в зависимости от каких-то условий
         response = self.client.get(reverse('add_record'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'app_blog/blogrecord_edit.html')
@@ -73,9 +76,12 @@ class AddBlogRecordTest(TestCase):
         self.assertEqual(response.status_code, 302,
                          f'Form error: {dict(form_errors)}' if form_errors else None)
         self.assertEqual(len(BlogRecord.objects.all()), 1, 'Post is not added to the database or added many times')
-        # TODO Стоит полностью проверять артефакты, создаваемые в процессе работы метода
+        #  Стоит полностью проверять артефакты, создаваемые в процессе работы метода
         #  (в данном случае все поля BlogRecord) или достаточно проверять их количество
         #  (мол, мы тут тестируем вьюху, в БД что-то упало - значит вьюха отработала)?
         #  С одной стороны: вьюха отработала - все молодцы.
         #  С другой - если во вьюхе или форме происходила (или будет происходить) промежуточная обработка данных,
         #  то такой тест не покажет их некорректную обработку
+        # TODO Если какой-то сложной логики при создании записи из переданных представлению данных формы нет, то
+        #  проверяем только результат добавления записи - запись создалась или нет. И наоборот - если исходные данные
+        #  преобразуются "дополнительной" логикой, то конечно это тоже стоит проверить отдельно.

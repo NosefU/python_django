@@ -33,7 +33,7 @@ class BatchAddBlogRecordTest(TestCase):
     def setUp(self):
         self.client.force_login(self.test_user)
 
-    def tearDown(self):
+    def tearDown(self):        
         self.client.logout()
 
     def test_available_in_desired_path(self):

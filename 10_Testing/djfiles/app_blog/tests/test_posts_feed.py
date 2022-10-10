@@ -33,8 +33,10 @@ class PostsFeedTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    # TODO Не знаю, есть смысл тестить передачу контекста и шаблона в ListView?
+    #  Не знаю, есть смысл тестить передачу контекста и шаблона в ListView?
     #  Хотя, завтра вьюху могут и переписать...
+    # TODO передачей контекста в шаблон занимается код фреймверка, а он уже имеет свои тесты, поэтому ответ - конечно же
+    #  нет, тестируем только свой, привнесённый вами в проект, код
     def test_posts_number(self):
         response = self.client.get(reverse('records_list'))
         self.assertEqual(response.status_code, 200)
