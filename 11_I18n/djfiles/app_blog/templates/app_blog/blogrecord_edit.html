@@ -1,4 +1,5 @@
 {% extends 'base_container.html' %}
+{% load i18n %}
 
 {% block content %}
     <div class="row justify-content-center content-container">
@@ -20,7 +21,9 @@
                 {# title #}
                 <p class="form-floating form-p">
                     {{ form.title }}
-                    <label for="{{ form.title.id_for_label }}">Заголовок</label>
+                    <label for="{{ form.title.id_for_label }}">
+                        {% trans 'Title' %}
+                    </label>
                 </p>
                 {% if form.title.errors %}
                     <div class="alert alert-danger alert-field" role="alert">
@@ -30,7 +33,9 @@
 
                 {# cover #}
                 <p class="form-p">
-                    <label for="{{ form.cover.id_for_label }}" class="form-label">Обложка:</label>
+                    <label for="{{ form.cover.id_for_label }}" class="form-label">
+                        {% trans 'Cover:' %}
+                    </label>
                     {{ form.cover }}
                 </p>
                 {% if form.cover.errors %}
@@ -49,7 +54,9 @@
                     </div>
                 {% endif %}
 
-                <button type="submit" class="btn btn-dark col-12 btn-shadow">Отправить</button>
+                <button type="submit" class="btn btn-dark col-12 btn-shadow">
+                    {% trans 'Upload post' %}
+                </button>
             </form>
         </div>
     </div>
