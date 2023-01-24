@@ -1,10 +1,11 @@
 {% extends 'base_container.html' %}
+{% load i18n %}
 
 {% block content %}
     <div class="row justify-content-center content-container">
         <div class="col-8 gy-4">
             <div class="row text-center">
-                <h1>Авторизация</h1>
+                <h1>{% trans 'Login page header' %}</h1>
             </div>
         </div>
         <div class="col-8 gy-2">
@@ -20,7 +21,9 @@
                 {# username #}
                 <p class="form-floating form-p">
                     {{ form.username }}
-                    <label for="{{ form.username.id_for_label }}">Логин</label>
+                    <label for="{{ form.username.id_for_label }}">
+                        {% trans 'Username' %}
+                    </label>
                 </p>
                 {% if form.username.errors %}
                     <div class="alert alert-danger alert-field" role="alert">
@@ -31,16 +34,22 @@
                 {# password #}
                 <p class="form-floating form-p">
                     {{ form.password }}
-                    <label for="{{ form.password.id_for_label }}">Пароль</label>
+                    <label for="{{ form.password.id_for_label }}">
+                        {% trans 'Password' %}
+                    </label>
                 </p>
                 {% if form.password.errors %}
                     <div class="alert alert-danger alert-field" role="alert">
                         {% for error in form.password.errors %} {{ error }} <br> {% endfor %}
                     </div>
                 {% endif %}
-                <button type="submit" class="btn btn-primary col-12">Войти</button>
+                <button type="submit" class="btn btn-primary col-12">
+                    {% trans 'Login' %}
+                </button>
             </form>
-        <a href="{% url 'register' %}" class="btn btn-outline-primary col-12 my-3">Зарегистрироваться</a>
+        <a href="{% url 'register' %}" class="btn btn-outline-primary col-12 my-3">
+            {% trans 'Sign up' %}
+        </a>
         </div>
     </div>
 {% endblock content %}
