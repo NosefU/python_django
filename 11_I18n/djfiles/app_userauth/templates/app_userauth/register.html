@@ -1,10 +1,11 @@
 {% extends 'base_container.html' %}
+{% load i18n %}
 
 {% block content %}
     <div class="row justify-content-center content-container">
         <div class="col-8 gy-4">
             <div class="row text-center">
-                <h1>Регистрация</h1>
+                <h1>{% trans 'Sign up page header' %}</h1>
             </div>
         </div>
         <div class="col-8 gy-2">
@@ -58,7 +59,9 @@
                         {% for error in form.password2.errors %} {{ error }} <br> {% endfor %}
                     </div>
                 {% endif %}
-                <button type="submit" class="btn btn-primary col-12">Зарегистрироваться</button>
+                <button type="submit" class="btn btn-primary col-12">
+                    {% trans 'Sign up button' %}
+                </button>
             </form>
         </div>
     </div>
