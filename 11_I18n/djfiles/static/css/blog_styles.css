@@ -111,3 +111,19 @@ body {
   max-height: 250px;
   margin-bottom: 1rem;
 }
+
+.btn-set-language {
+    border-color: #e9ecef;
+    background-color: #e9ecef;
+    color: var(--bs-gray-700);
+}
+
+.language-selector {
+    border-color: #e9ecef;
+    color: var(--bs-gray-700);
+}
+
+.language-selector:focus {
+    box-shadow: 0 0 0 0.25rem rgb(108 117 125 / 50%);
+    border-color: #e9ecef;
+}
