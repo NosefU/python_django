@@ -1,5 +1,6 @@
 {% extends 'base_container.html' %}
 {% block content %}
+{% load i18n %}
 {% load tz %}
 
     <div class="row content-container col-10 offset-md-1">
@@ -43,7 +44,9 @@
                     {#   обрезанный текст поста   #}
                     {{ object.body|truncatechars_html:400|safe }}
                     <p>
-                        <a href="{% url 'record_page' object.id %}" class="btn btn-outline-primary">Читать дальше →</a>
+                        <a href="{% url 'record_page' object.id %}" class="btn btn-outline-primary">
+                            {% trans 'Read more →' %}
+                        </a>
                     </p>
 
                 </div>
