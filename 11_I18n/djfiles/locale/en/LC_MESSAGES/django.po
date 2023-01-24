@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-25 00:25+0300\n"
+"POT-Creation-Date: 2023-01-25 00:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,34 @@ msgstr ""
 #: .\app_blog\apps.py:7
 msgid "app_blog"
 msgstr "Blog"
+
+#: .\app_blog\models.py:7
+msgid "Заголовок"
+msgstr "Title"
+
+#: .\app_blog\models.py:8
+msgid "Текст записи"
+msgstr "Content"
+
+#: .\app_blog\models.py:9
+msgid "Время создания"
+msgstr "Created"
+
+#: .\app_blog\models.py:11
+msgid "Автор"
+msgstr "Author"
+
+#: .\app_blog\models.py:12
+msgid "Обложка"
+msgstr "Cover"
+
+#: .\app_blog\models.py:16
+msgid "blog_records"
+msgstr "posts"
+
+#: .\app_blog\models.py:17
+msgid "blog_record"
+msgstr "post"
 
 #: .\app_blog\templates\app_blog\blogrecord_batch_add.html:8
 #: .\templates\navbar.html:70
