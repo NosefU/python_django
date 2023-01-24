@@ -6,7 +6,7 @@
         <div class="col-8 gy-4">
             <div class="row text-center">
                 <h1>
-                    {% blocktrans %}{{ request.user.username }}'s profile{% endblocktrans %}
+                    {% blocktrans with username=request.user.username %}{{ username }}'s profile{% endblocktrans %}
                 </h1>
             </div>
         </div>
