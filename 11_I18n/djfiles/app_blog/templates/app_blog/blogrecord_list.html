@@ -1,0 +1,55 @@
+{% extends 'base_container.html' %}
+{% block content %}
+{% load tz %}
+
+    <div class="row content-container col-10 offset-md-1">
+
+        {% for object in object_list %}
+            {#   карточка   #}
+            <div class="d-flex align-items-start profile-feed-item">
+
+                {#   аватар   #}
+                <a href="{% url 'user_profile_detail' object.author.id %}">
+                    <img src="{{ object.author.profile.avatar.url }}" alt="profile" class="img-sm rounded-circle">
+                </a>
+
+                {#   запись   #}
+                <div class="col-11 ms-4">
+
+                    {#   заголовок #}
+                    {% if object.title %}
+                        <a href="{% url 'record_page' object.id %}">
+                            <h4>{{ object.title }}</h4>
+                        </a>
+                    {% endif %}
+
+                    {# юзернейм и дата публикации #}
+                    <h6>
+                        <a href="{% url 'user_profile_detail' object.author.id %}">{{ object.author.username }}</a>
+                        <small class="ms-3 text-muted">{{ object.created|timezone:"Europe/Moscow" }}</small>
+                    </h6>
+
+                    {#   обложка (если есть)   #}
+                    {% if object.cover %}
+                        <div class="thumb-post">
+                        {% if object.cover.name|slice:":7" == "http://" or object.cover.name|slice:":8" == "https://" %}
+                            <img src="{{ object.cover.name }}" alt="КДПВ" class="rounded-3">
+                        {% else %}
+                            <img src="{{ object.cover.url }}" alt="КДПВ" class="rounded-3">
+                        {%  endif %}
+                        </div>
+                    {% endif %}
+
+                    {#   обрезанный текст поста   #}
+                    {{ object.body|truncatechars_html:400|safe }}
+                    <p>
+                        <a href="{% url 'record_page' object.id %}" class="btn btn-outline-primary">Читать дальше →</a>
+                    </p>
+
+                </div>
+            </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
+
