@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-25 00:35+0300\n"
+"POT-Creation-Date: 2023-01-25 01:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,6 +93,38 @@ msgstr "Читать далее →"
 msgid "Создать пост"
 msgstr "Создать пост"
 
+#: .\app_userauth\apps.py:7
+msgid "app_userauth"
+msgstr "Управление профилями пользователей"
+
+#: .\app_userauth\models.py:9
+msgid "Юзернейм"
+msgstr "Юзернейм"
+
+#: .\app_userauth\models.py:10
+msgid "Имя"
+msgstr "Имя"
+
+#: .\app_userauth\models.py:11
+msgid "Фамилия"
+msgstr "Фамилия"
+
+#: .\app_userauth\models.py:12
+msgid "О себе"
+msgstr "О себе"
+
+#: .\app_userauth\models.py:14
+msgid "Аватар"
+msgstr "Аватар"
+
+#: .\app_userauth\models.py:17
+msgid "user_profiles"
+msgstr "профили пользователей"
+
+#: .\app_userauth\models.py:18
+msgid "user_profile"
+msgstr "профиль пользователя"
+
 #: .\app_userauth\templates\app_userauth\login.html:8
 msgid "Login page header"
 msgstr "Авторизация"
@@ -170,3 +202,8 @@ msgstr "Создать пост"
 #: .\templates\navbar.html:73
 msgid "Logout"
 msgstr "Выйти"
+
+#, fuzzy
+#~| msgid "Profile"
+#~ msgid "profile"
+#~ msgstr "Профиль"
