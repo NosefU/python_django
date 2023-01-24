@@ -1,5 +1,6 @@
 {% extends 'base_container.html' %}
 {% block content %}
+{% load i18n %}
 {% load tz %}
 
     <div class="row content-container col-10 offset-md-1">
@@ -58,11 +59,15 @@
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#postCarousel"  data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Предыдущий</span>
+                            <span class="visually-hidden">
+                                {% trans 'Previous' %}
+                            </span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#postCarousel"  data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Следующий</span>
+                            <span class="visually-hidden">
+                                {% trans 'Next' %}
+                            </span>
                         </button>
                     </div>
                 {% endif %}
