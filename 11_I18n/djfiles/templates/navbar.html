@@ -40,14 +40,18 @@
                                     </option>
                                 {% endfor %}
                             </select>
-                            <button class="btn btn-outline-secondary btn-set-language" type="submit">Изменить</button>
+                            <button class="btn btn-outline-secondary btn-set-language" type="submit">
+                                {% trans 'Change language' %}
+                            </button>
                         </div>
                     </form>
                 </div>
 
                 {% if not request.user.is_authenticated %}
                         <div class="navbar-nav">
-                            <a href="{% url 'login' %}" class="btn nav-link btn-login-logout">Войти / Зарегистрироваться</a>
+                            <a href="{% url 'login' %}" class="btn nav-link btn-login-logout">
+                                {% trans 'Login / Sign up' %}
+                            </a>
                         </div>
                     {% else %}
                         <div class="nav-item dropdown">
@@ -56,17 +60,21 @@
                                 {{ request.user.username }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="{% url 'user_profile_detail' pk=request.user.id %}">Профиль</a></li>
-                                <li><a class="dropdown-item" href="{% url 'add_record' %}">Создать пост</a></li>
-                                <li><a class="dropdown-item" href="{% url 'batch_add_record' %}">Пакетное добавление постов</a></li>
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
+                                <li><a class="dropdown-item" href="{% url 'user_profile_detail' pk=request.user.id %}">
+                                    {% trans 'Profile' %}
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'add_record' %}">
+                                    {% trans 'Create post' %}
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'batch_add_record' %}">
+                                    {% trans 'Batch add posts' %}
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">
+                                    {% trans 'Logout' %}
+                                </a></li>
                             </ul>
                         </div>
                     {% endif %}
-
-
-
-
             </div>
         </nav>
     </div>
