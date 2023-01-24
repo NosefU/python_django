@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_summernote',
-    'app_userauth',
+    'app_userauth.apps.AppUserauthConfig',
     'app_blog.apps.AppBlogConfig'
 ]
 
