@@ -20,14 +20,14 @@
         </div>
         <div class="col-7 gy-3 fs-5">
             <dl class="row">
-              <dt class="col-sm-2">{% trans 'First name' %}</dt>
-              <dd class="col-sm-10">{{ object.first_name }}</dd>
+              <dt class="col-sm-3">{% trans 'First name' %}</dt>
+              <dd class="col-sm-9">{{ object.first_name }}</dd>
 
-              <dt class="col-sm-2">{% trans 'Last name' %}</dt>
-              <dd class="col-sm-10">{{ object.last_name }}</dd>
+              <dt class="col-sm-3">{% trans 'Last name' %}</dt>
+              <dd class="col-sm-9">{{ object.last_name }}</dd>
 
-              <dt class="col-sm-2">{% trans 'About' %}</dt>
-              <dd class="col-sm-10">{{ object.about }}</dd>
+              <dt class="col-sm-3">{% trans 'About' %}</dt>
+              <dd class="col-sm-9">{{ object.about }}</dd>
             </dl>
         </div>
          {% if object.user.id == request.user.id %}
