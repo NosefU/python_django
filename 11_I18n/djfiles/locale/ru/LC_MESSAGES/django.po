@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 23:52+0300\n"
+"POT-Creation-Date: 2023-01-25 00:19+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,6 +56,10 @@ msgstr "Отправить"
 #: .\app_blog\templates\app_blog\blogrecord_list.html:48
 msgid "Read more →"
 msgstr "Читать далее →"
+
+#: .\app_blog\views.py:17 .\app_blog\views.py:23
+msgid "Создать пост"
+msgstr "Создать пост"
 
 #: .\app_userauth\templates\app_userauth\login.html:8
 msgid "Login page header"
