@@ -1,10 +1,13 @@
 {% extends 'base_container.html' %}
+{% load i18n %}
 
 {% block content %}
     <div class="row justify-content-center content-container">
         <div class="col-8 gy-4">
             <div class="row text-center">
-                <h1>Профиль пользователя {{ request.user.username }}</h1>
+                <h1>
+                    {% blocktrans %}{{ request.user.username }}'s profile{% endblocktrans %}
+                </h1>
             </div>
         </div>
         {% if profile_is_saved %}
@@ -15,7 +18,7 @@
                         <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                     </svg>
                     <div>
-                        Профиль успешно сохранён
+                        {% trans 'Profile succesfully saved' %}
                     </div>
                 </div>
             </div>
@@ -84,7 +87,7 @@
                     </div>
                 {% endif %}
 
-                <button type="submit" class="btn btn-primary col-12">Сохранить</button>
+                <button type="submit" class="btn btn-primary col-12">{% trans 'Save' %}</button>
             </form>
         </div>
     </div>
