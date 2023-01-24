@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View, generic
+from django.utils.translation import gettext as _
 
 from app_blog.forms import BlogRecordForm, BatchBlogRecordForm
 from app_blog.models import BlogRecord
@@ -13,13 +14,13 @@ from app_blog.models import BlogRecord
 class AddBlogRecord(LoginRequiredMixin, View):
     def get(self, request):
         record_form = BlogRecordForm()
-        context = {'form': record_form, 'title': 'Создать пост'}
+        context = {'form': record_form, 'title': _('Создать пост')}
         return render(request, 'app_blog/blogrecord_edit.html', context=context)
 
     def post(self, request):
         record_form = BlogRecordForm(request.POST, request.FILES)
         if not record_form.is_valid():
-            context = {'form': record_form, 'title': 'Создать пост'}
+            context = {'form': record_form, 'title': _('Создать пост')}
             return render(request, 'app_blog/blogrecord_edit.html', context=context)
 
         record = BlogRecord(
