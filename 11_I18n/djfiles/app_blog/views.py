@@ -14,13 +14,13 @@ from app_blog.models import BlogRecord
 class AddBlogRecord(LoginRequiredMixin, View):
     def get(self, request):
         record_form = BlogRecordForm()
-        context = {'form': record_form, 'title': _('Создать пост')}
+        context = {'form': record_form, 'title': _('Create post')}
         return render(request, 'app_blog/blogrecord_edit.html', context=context)
 
     def post(self, request):
         record_form = BlogRecordForm(request.POST, request.FILES)
         if not record_form.is_valid():
-            context = {'form': record_form, 'title': _('Создать пост')}
+            context = {'form': record_form, 'title': _('Create post')}
             return render(request, 'app_blog/blogrecord_edit.html', context=context)
 
         record = BlogRecord(
