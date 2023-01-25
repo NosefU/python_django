@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-25 01:12+0300\n"
+"POT-Creation-Date: 2023-01-25 16:34+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,26 +22,26 @@ msgstr ""
 
 #: .\app_blog\apps.py:7
 msgid "app_blog"
-msgstr "Блог"
+msgstr ""
 
-#: .\app_blog\models.py:7
-msgid "Заголовок"
+#: .\app_blog\models.py:7 .\app_blog\templates\app_blog\blogrecord_edit.html:25
+msgid "Title"
 msgstr "Заголовок"
 
 #: .\app_blog\models.py:8
-msgid "Текст записи"
-msgstr "Текст записи"
+msgid "Content"
+msgstr "Текст поста"
 
 #: .\app_blog\models.py:9
-msgid "Время создания"
-msgstr "Время создания"
+msgid "Created"
+msgstr "Дата создания"
 
 #: .\app_blog\models.py:11
-msgid "Автор"
+msgid "Author"
 msgstr "Автор"
 
 #: .\app_blog\models.py:12
-msgid "Обложка"
+msgid "Cover"
 msgstr "Обложка"
 
 #: .\app_blog\models.py:16
@@ -73,24 +73,20 @@ msgstr "Предыдущий"
 msgid "Next"
 msgstr "Следующий"
 
-#: .\app_blog\templates\app_blog\blogrecord_edit.html:25
-msgid "Title"
-msgstr "Заголовок"
-
 #: .\app_blog\templates\app_blog\blogrecord_edit.html:37
 msgid "Cover:"
 msgstr "Обложка:"
 
 #: .\app_blog\templates\app_blog\blogrecord_edit.html:58
 msgid "Upload post"
-msgstr "Отправить"
+msgstr "Загрузить пост"
 
 #: .\app_blog\templates\app_blog\blogrecord_list.html:48
 msgid "Read more →"
 msgstr "Читать далее →"
 
-#: .\app_blog\views.py:17 .\app_blog\views.py:23
-msgid "Создать пост"
+#: .\app_blog\views.py:17 .\app_blog\views.py:23 .\templates\navbar.html:67
+msgid "Create post"
 msgstr "Создать пост"
 
 #: .\app_userauth\apps.py:7
@@ -98,23 +94,27 @@ msgid "app_userauth"
 msgstr "Управление профилями пользователей"
 
 #: .\app_userauth\models.py:9
-msgid "Юзернейм"
+#: .\app_userauth\templates\app_userauth\login.html:25
+msgid "Username"
 msgstr "Юзернейм"
 
 #: .\app_userauth\models.py:10
-msgid "Имя"
+#: .\app_userauth\templates\app_userauth\userprofile_detail.html:23
+msgid "First name"
 msgstr "Имя"
 
 #: .\app_userauth\models.py:11
-msgid "Фамилия"
+#: .\app_userauth\templates\app_userauth\userprofile_detail.html:26
+msgid "Last name"
 msgstr "Фамилия"
 
 #: .\app_userauth\models.py:12
-msgid "О себе"
+#: .\app_userauth\templates\app_userauth\userprofile_detail.html:29
+msgid "About"
 msgstr "О себе"
 
 #: .\app_userauth\models.py:14
-msgid "Аватар"
+msgid "Avatar"
 msgstr "Аватар"
 
 #: .\app_userauth\models.py:17
@@ -128,10 +128,6 @@ msgstr "профиль пользователя"
 #: .\app_userauth\templates\app_userauth\login.html:8
 msgid "Login page header"
 msgstr "Авторизация"
-
-#: .\app_userauth\templates\app_userauth\login.html:25
-msgid "Username"
-msgstr "Логин"
 
 #: .\app_userauth\templates\app_userauth\login.html:38
 msgid "Password"
@@ -159,18 +155,6 @@ msgstr "Зарегистрироваться"
 msgid "%(username)s's profile"
 msgstr "Профиль пользователя %(username)s"
 
-#: .\app_userauth\templates\app_userauth\userprofile_detail.html:23
-msgid "First name"
-msgstr "Имя"
-
-#: .\app_userauth\templates\app_userauth\userprofile_detail.html:26
-msgid "Last name"
-msgstr "Фамилия"
-
-#: .\app_userauth\templates\app_userauth\userprofile_detail.html:29
-msgid "About"
-msgstr "О себе"
-
 #: .\app_userauth\templates\app_userauth\userprofile_detail.html:35
 msgid "Edit"
 msgstr "Редактировать"
@@ -195,15 +179,6 @@ msgstr "Войти / Зарегистрироваться"
 msgid "Profile"
 msgstr "Профиль"
 
-#: .\templates\navbar.html:67
-msgid "Create post"
-msgstr "Создать пост"
-
 #: .\templates\navbar.html:73
 msgid "Logout"
 msgstr "Выйти"
-
-#, fuzzy
-#~| msgid "Profile"
-#~ msgid "profile"
-#~ msgstr "Профиль"

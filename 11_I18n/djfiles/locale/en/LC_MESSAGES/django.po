@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-25 01:13+0300\n"
+"POT-Creation-Date: 2023-01-25 16:34+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,24 +22,24 @@ msgstr ""
 msgid "app_blog"
 msgstr "Blog"
 
-#: .\app_blog\models.py:7
-msgid "Заголовок"
+#: .\app_blog\models.py:7 .\app_blog\templates\app_blog\blogrecord_edit.html:25
+msgid "Title"
 msgstr "Title"
 
 #: .\app_blog\models.py:8
-msgid "Текст записи"
+msgid "Content"
 msgstr "Content"
 
 #: .\app_blog\models.py:9
-msgid "Время создания"
+msgid "Created"
 msgstr "Created"
 
 #: .\app_blog\models.py:11
-msgid "Автор"
+msgid "Author"
 msgstr "Author"
 
 #: .\app_blog\models.py:12
-msgid "Обложка"
+msgid "Cover"
 msgstr "Cover"
 
 #: .\app_blog\models.py:16
@@ -71,10 +71,6 @@ msgstr "Previous"
 msgid "Next"
 msgstr "Next"
 
-#: .\app_blog\templates\app_blog\blogrecord_edit.html:25
-msgid "Title"
-msgstr "Title"
-
 #: .\app_blog\templates\app_blog\blogrecord_edit.html:37
 msgid "Cover:"
 msgstr "Cover:"
@@ -87,8 +83,8 @@ msgstr "Upload"
 msgid "Read more →"
 msgstr "Read more →"
 
-#: .\app_blog\views.py:17 .\app_blog\views.py:23
-msgid "Создать пост"
+#: .\app_blog\views.py:17 .\app_blog\views.py:23 .\templates\navbar.html:67
+msgid "Create post"
 msgstr "Create post"
 
 #: .\app_userauth\apps.py:7
@@ -96,23 +92,27 @@ msgid "app_userauth"
 msgstr "User profiles management"
 
 #: .\app_userauth\models.py:9
-msgid "Юзернейм"
+#: .\app_userauth\templates\app_userauth\login.html:25
+msgid "Username"
 msgstr "Username"
 
 #: .\app_userauth\models.py:10
-msgid "Имя"
+#: .\app_userauth\templates\app_userauth\userprofile_detail.html:23
+msgid "First name"
 msgstr "First name"
 
 #: .\app_userauth\models.py:11
-msgid "Фамилия"
+#: .\app_userauth\templates\app_userauth\userprofile_detail.html:26
+msgid "Last name"
 msgstr "Last name"
 
 #: .\app_userauth\models.py:12
-msgid "О себе"
+#: .\app_userauth\templates\app_userauth\userprofile_detail.html:29
+msgid "About"
 msgstr "About"
 
 #: .\app_userauth\models.py:14
-msgid "Аватар"
+msgid "Avatar"
 msgstr "Avatar"
 
 #: .\app_userauth\models.py:17
@@ -126,10 +126,6 @@ msgstr "user profile"
 #: .\app_userauth\templates\app_userauth\login.html:8
 msgid "Login page header"
 msgstr "Login"
-
-#: .\app_userauth\templates\app_userauth\login.html:25
-msgid "Username"
-msgstr "Username"
 
 #: .\app_userauth\templates\app_userauth\login.html:38
 msgid "Password"
@@ -157,25 +153,13 @@ msgstr "Sign up"
 msgid "%(username)s's profile"
 msgstr "%(username)s's profile"
 
-#: .\app_userauth\templates\app_userauth\userprofile_detail.html:23
-msgid "First name"
-msgstr "First name"
-
-#: .\app_userauth\templates\app_userauth\userprofile_detail.html:26
-msgid "Last name"
-msgstr "Last name"
-
-#: .\app_userauth\templates\app_userauth\userprofile_detail.html:29
-msgid "About"
-msgstr "About"
-
 #: .\app_userauth\templates\app_userauth\userprofile_detail.html:35
 msgid "Edit"
 msgstr "Edit"
 
 #: .\app_userauth\templates\app_userauth\userprofile_edit.html:21
-msgid "Profile succesfully saved"
-msgstr "Profile succesfully saved"
+msgid "Profile successfully saved"
+msgstr "Profile successfully saved"
 
 #: .\app_userauth\templates\app_userauth\userprofile_edit.html:90
 msgid "Save"
@@ -193,13 +177,42 @@ msgstr "Login / Sign up"
 msgid "Profile"
 msgstr "Profile"
 
-#: .\templates\navbar.html:67
-msgid "Create post"
-msgstr "Create post"
-
 #: .\templates\navbar.html:73
 msgid "Logout"
 msgstr "Logout"
+
+#~ msgid "Создать пост"
+#~ msgstr "Create post"
+
+#~ msgid "Заголовок"
+#~ msgstr "Title"
+
+#~ msgid "Текст записи"
+#~ msgstr "Content"
+
+#~ msgid "Время создания"
+#~ msgstr "Created"
+
+#~ msgid "Автор"
+#~ msgstr "Author"
+
+#~ msgid "Обложка"
+#~ msgstr "Cover"
+
+#~ msgid "Юзернейм"
+#~ msgstr "Username"
+
+#~ msgid "Имя"
+#~ msgstr "First name"
+
+#~ msgid "Фамилия"
+#~ msgstr "Last name"
+
+#~ msgid "О себе"
+#~ msgstr "About"
+
+#~ msgid "Аватар"
+#~ msgstr "Avatar"
 
 #, fuzzy
 #~| msgid "Profile"
