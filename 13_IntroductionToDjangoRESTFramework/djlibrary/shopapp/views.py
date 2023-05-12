@@ -3,6 +3,7 @@ from timeit import default_timer
 from django.contrib.auth.models import Group
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 
@@ -67,3 +68,18 @@ class ProductViewSet(ModelViewSet):
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    filter_backends = [
+        SearchFilter,
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'delivery_address',
+        'promocode',
+        'created_at',
+        'user',
+    ]
+    search_fields = [
+        'delivery_address',
+        'promocode',
+        'created_at',
+    ]
