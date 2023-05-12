@@ -3,6 +3,7 @@ from timeit import default_timer
 from django.contrib.auth.models import Group
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Product, Order
@@ -46,6 +47,21 @@ def orders_list(request: HttpRequest):
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [
+        SearchFilter,
+        OrderingFilter,
+    ]
+    search_fields = [
+        'name',
+        'description',
+    ]
+    ordering_fields = [
+        'pk',
+        'name',
+        'description',
+        'price',
+        'discount',
+    ]
 
 
 class OrderViewSet(ModelViewSet):
