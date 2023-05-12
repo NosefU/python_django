@@ -1,12 +1,25 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
-from .views import shop_index, groups_list, products_list, orders_list
+from .views import (
+    shop_index,
+    groups_list,
+    products_list,
+    orders_list,
+    ProductViewSet,
+    OrderViewSet,
+)
 
 app_name = "shopapp"
+
+routers = DefaultRouter()
+routers.register('products', ProductViewSet)
+routers.register('orders', OrderViewSet)
 
 urlpatterns = [
     path("", shop_index, name="index"),
     path("groups/", groups_list, name="groups_list"),
     path("products/", products_list, name="products_list"),
     path("orders/", orders_list, name="orders_list"),
+    path('api/', include(routers.urls))
 ]
