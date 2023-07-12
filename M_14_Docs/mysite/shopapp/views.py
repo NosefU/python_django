@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from drf_spectacular.utils import extend_schema_view, extend_schema
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
@@ -14,7 +15,27 @@ from .forms import ProductForm
 from .models import Product, Order, ProductImage
 from .serializers import ProductSerializer
 
-
+@extend_schema(tags=["Product"])
+@extend_schema_view(
+    list=extend_schema(
+            summary='Получить список товаров',
+        ),
+    retrieve=extend_schema(
+        summary='Подробная информация о товаре'
+    ),
+    create=extend_schema(
+        summary='Добавление нового товара',
+    ),
+    update=extend_schema(
+        summary='Изменение существующего товара',
+    ),
+    partial_update=extend_schema(
+        summary='Частичное изменение существующего товара',
+    ),
+    destroy=extend_schema(
+        summary='Удалить товар',
+    ),
+)
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
